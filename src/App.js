@@ -5,6 +5,7 @@ import HomeScreen from "./components/HomeScreen";
 import Recipe from "./components/Recipe";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col, Container } from "react-bootstrap";
+import SearchResult from "./components/SearchResult";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
 
             <Route path="/">
               <Route index element={<HomeScreen/>} />
+
+                <Route path="search/:query"
+                       element={<SearchResult/>}/>
 
                 <Route path="recipe/:id"
                        element={<Recipe/>}/>

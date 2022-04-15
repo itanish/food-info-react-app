@@ -12,8 +12,6 @@ const Recipe = () => {
                                          });
     const params = useParams();
 
-    console.log(params.id)
-
     useEffect(() => {
         const fetchData = async () => {
 
