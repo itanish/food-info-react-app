@@ -6,7 +6,7 @@ import {useEffect} from "react";
 const UserProfile = () => {
     
     const dispatch = useDispatch();
-    let users = useSelector(state => state.users)
+    const users = useSelector(state => state.users)
     useEffect(() => {
         getUserByEmail(dispatch, "rajat@mail.com");
     }, []);
@@ -14,12 +14,10 @@ const UserProfile = () => {
 
     return (
         <>
-        <span>Hello</span>
             {
                 users.map((u) => {
                     return (
                         <div>
-                            <span>{u.email}</span>
                             <span>{u.details.name}</span>
                         </div>
                     );
