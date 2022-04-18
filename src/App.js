@@ -10,6 +10,8 @@ import UserProfile from "./components/profile/user_profile";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import userReducer from "./reducers/user-reducer";
+import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
   const reducer = combineReducers({ users: userReducer });
@@ -22,6 +24,8 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<HomeScreen />} />
+              <Route path="register" element={<Register />}/>
+              <Route path="login" element={<Login />}/>
               <Route path="search/:query" element={<SearchResult />} />
               <Route path="recipe/:id" element={<Recipe />} />
               <Route path="profile" element={<UserProfile />} />
