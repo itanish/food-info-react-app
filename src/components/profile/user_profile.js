@@ -8,10 +8,8 @@ const UserProfile = () => {
     const dispatch = useDispatch();
     let users = useSelector(state => state.users)
     useEffect(() => {
-        users =  getUserByEmail(dispatch, "rajat@mail.com");
+        getUserByEmail(dispatch, "rajat@mail.com");
     }, []);
-
-    // const users = useSelector(state => state.users)
     console.log(users);
 
     return (

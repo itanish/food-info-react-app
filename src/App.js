@@ -7,10 +7,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col, Container } from "react-bootstrap";
 import SearchResult from "./components/SearchResult";
 import UserProfile from './components/profile/user_profile';
+import { Provider } from 'react-redux';
+import {createStore, combineReducers} from "redux";
+import userReducer from './reducers/user-reducer';
+
 
 function App() {
+
+    const reducer = combineReducers({users: userReducer});
+    const store = createStore(reducer);
+
+
   return (
 
+    <Provider store={store}>
       <BrowserRouter>
         <div className="container">
           <Routes>
@@ -25,6 +35,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+    </Provider>
 
   );
 }
