@@ -6,6 +6,7 @@ import Recipe from "./components/Recipe";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col, Container } from "react-bootstrap";
 import SearchResult from "./components/SearchResult";
+import UserProfile from './components/profile/user_profile';
 
 function App() {
   return (
@@ -15,14 +16,10 @@ function App() {
           <Routes>
 
             <Route path="/">
-              <Route index element={<HomeScreen/>} />
-
-                <Route path="search/:query"
-                       element={<SearchResult/>}/>
-
-                <Route path="recipe/:id"
-                       element={<Recipe/>}/>
-
+                <Route index element={<HomeScreen/>} />
+                <Route path="search/:query" element={<SearchResult/>}/>
+                <Route path="recipe/:id" element={<Recipe/>}/>
+                <Route path="profile" element={<UserProfile />}/>
             </Route>
 
           </Routes>

@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {getUserByEmail} from "../actions/user_actions";
+import {getUserByEmail} from "../../actions/user_actions";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 
