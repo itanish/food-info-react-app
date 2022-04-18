@@ -1,24 +1,39 @@
+import "./search.css"
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 const Search = () => {
+
+    let navigate = useNavigate();
+    const [input, setInput] = useState('');
+
+    const routeChange = () =>{
+        let path = `search/${input}`;
+        navigate(path);
+    }
+
+
     return(
         <div>
-            <nav className="navbar navbar-light bg-primary">
+            <div className="row height d-flex justify-content-center align-items-center">
+                <div className="col-md-8 mt-5 mb-5">
+                    <div className="search">
+                        <i className="fa fa-search"></i>
+                        <input type="text"
+                               className="form-control"
+                               placeholder="Search any recipe here!"
+                               value={input}
+                               onInput={e => setInput(e.target.value)}/>
 
-                <a className="navbar-brand" href="#">
-                    <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png" width="30" height="30" class="d-inline-block align-top" alt=""/>
-                        Bootstrap
-                </a>
-
-                <form className="form-inline">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search"
-                           aria-label="Search"/>
-                        <button className="btn btn-outline-success my-2 my-sm-0"
-                                type="submit">Search
+                        <button className="btn btn-primary"
+                                onClick={routeChange}>
+                            Search
                         </button>
-                </form>
-
-            </nav>
+                    </div>
+                </div>
             </div>
+
+        </div>
     )
 }
 export default Search;
