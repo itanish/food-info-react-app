@@ -13,12 +13,11 @@ const SearchResult = () => {
             const response = await fetch(
                 `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=15&apiKey=695103bbacda486d88166862e1adcd8e`)
             const recipeData = await response.json()
-            setRecipe(recipeData.results)
-            console.log(recipeData);
+            setRecipe(recipeData.results);
         }
+
         fetchData()
     }, [])
-
 
     return(
         <Container>
@@ -41,5 +40,6 @@ const SearchResult = () => {
         </Container>
     )
 }
+
 export default SearchResult;
 
