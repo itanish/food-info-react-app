@@ -1,17 +1,17 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
+import "../../config.js"
 
 const RandomRecipes = () => {
 
     const [recipe, setRecipe] = useState([]);
+    const apiKey = global.config.apiKeys.key1;
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(
-                'https://api.spoonacular.com/recipes/random?'
-                + 'number=4&'
-                + 'apiKey=695103bbacda486d88166862e1adcd8e')
+                `https://api.spoonacular.com/recipes/random?number=4&apiKey=${apiKey}`)
             const recipeData = await response.json()
             setRecipe(recipeData.recipes)
             console.log(recipeData);

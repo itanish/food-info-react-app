@@ -2,16 +2,19 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
 import {useParams} from "react-router-dom";
+import "../../config.js"
 
 const SearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
     const params = useParams();
+    const apiKey = global.config.apiKeys.key1;
+
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(
-                `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=15&apiKey=695103bbacda486d88166862e1adcd8e`)
+                `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=15&apiKey=${apiKey}`)
             const recipeData = await response.json()
             setRecipe(recipeData.results);
         }

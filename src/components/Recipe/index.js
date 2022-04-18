@@ -2,6 +2,7 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
+import '../../config.js';
 
 const Recipe = () => {
 
@@ -12,11 +13,13 @@ const Recipe = () => {
                                          });
     const params = useParams();
 
+    const apiKey = global.config.apiKeys.key1;
+
     useEffect(() => {
         const fetchData = async () => {
 
             const response = await fetch(
-                `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=695103bbacda486d88166862e1adcd8e`)
+                `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${apiKey}`)
 
             const recipeData = await response.json()
             setRecipe(recipeData)
