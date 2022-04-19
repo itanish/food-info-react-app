@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
 import {useParams} from "react-router-dom";
 import "../../config.js"
-
+import "./searchresult.css"
 const SearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
@@ -14,7 +14,7 @@ const SearchResult = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(
-                `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=15&apiKey=${apiKey}`)
+                `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=12&apiKey=${apiKey}`)
             const recipeData = await response.json()
             setRecipe(recipeData.results);
         }
@@ -24,10 +24,10 @@ const SearchResult = () => {
 
     return(
         <Container>
-            <h3>Search Results</h3>
+            <h3 className="mt-3">Search Results</h3>
             <Row>
                 {recipe.map((recipe, k) => (
-                    <Col key={k} xs={12} md={4} lg={3}>
+                    <Col key={k} xs={12} md={4} lg={3} className="mt-3">
                         <Card >
                             <Card.Img src={recipe.image} />
 
@@ -40,6 +40,7 @@ const SearchResult = () => {
                     </Col>
                 ))}
             </Row>
+
         </Container>
     )
 }
