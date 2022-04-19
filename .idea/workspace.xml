@@ -38,7 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/IngredientSearch" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -49,6 +49,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/IngredientSearch" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -61,7 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649997920597</updated>
       <workItem from="1649997923909" duration="8919000" />
-      <workItem from="1650317213157" duration="2061000" />
+      <workItem from="1650317213157" duration="6251000" />
     </task>
     <servers />
   </component>

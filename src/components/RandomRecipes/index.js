@@ -2,7 +2,7 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
 import "../../config.js"
-
+import "./random.css"
 const RandomRecipes = () => {
 
     const [recipe, setRecipe] = useState([]);
@@ -22,7 +22,7 @@ const RandomRecipes = () => {
 
     return(
         <Container>
-            <h3>Random Recipies</h3>
+            <h3>Random Recipes</h3>
             <Row>
                 {recipe.map((recipe, k) => (
                     <Col key={k} xs={12} md={4} lg={3}>

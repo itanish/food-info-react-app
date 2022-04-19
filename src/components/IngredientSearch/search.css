@@ -28,3 +28,7 @@
     width: 110px;
     background: forestgreen;
 }
+
+.wd-add-image{
+    background-image: -webkit-linear-gradient(forestgreen, darkgreen);
+}
