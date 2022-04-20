@@ -1,19 +1,24 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeScreen from "./components/HomeScreen";
 import Recipe from "./components/Recipe";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Col, Container } from "react-bootstrap";
+
 import SearchResult from "./components/SearchResult";
+<<<<<<< Updated upstream
 import IngredientSearchResult from "./components/IngredientSearchResult"
 import UserProfile from "./components/profile/user_profile";
 import Ingredient from "./components/Ingredient"
+=======
+import UserProfile from "./components/profile";
+>>>>>>> Stashed changes
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import userReducer from "./reducers/user-reducer";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import EditUserProfile from "./components/EditUserProfile";
 
 function App() {
   const reducer = combineReducers({ users: userReducer });
@@ -33,6 +38,7 @@ function App() {
               <Route path="profile" element={<UserProfile />} />
               <Route path="itemsearch/:query" element={<IngredientSearchResult />} />
               <Route path="ingredient/:id" element={<Ingredient />} />
+              <Route path="editProfile" element={<EditUserProfile />} />
             </Route>
           </Routes>
         </div>
