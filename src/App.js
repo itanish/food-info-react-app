@@ -4,15 +4,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeScreen from "./components/HomeScreen";
 import Recipe from "./components/Recipe";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import SearchResult from "./components/SearchResult";
-<<<<<<< Updated upstream
 import IngredientSearchResult from "./components/IngredientSearchResult"
-import UserProfile from "./components/profile/user_profile";
 import Ingredient from "./components/Ingredient"
-=======
 import UserProfile from "./components/profile";
->>>>>>> Stashed changes
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import userReducer from "./reducers/user-reducer";
