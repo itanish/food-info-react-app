@@ -22,10 +22,26 @@ export const getUserByEmail = async (dispatch, email) => {
      })
 }
 
-export const updateUser = async (dispatch, user, uid) => {
-    const newUser = await service.updateUser(user, uid);
+export const updateUser = async (dispatch, user) => {
+    const newUser = await service.updateUser(user);
     dispatch({
         type: 'UPDATE_USER',
         user: newUser
+    })
+}
+
+export const createUser = async (dispatch, user) => {
+    const newUser = await service.createUser(user);
+    dispatch({
+        type: 'CREATE_USER',
+        user: newUser
+    })
+}
+
+export const loginUser = async (dispatch, loginUser) => {
+    const loggedInUser = await service.loginUser(loginUser);
+    dispatch({
+        type: 'LOGIN_USER',
+        user : loggedInUser
     })
 }

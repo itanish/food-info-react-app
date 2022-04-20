@@ -2,27 +2,22 @@ import {useSelector} from "react-redux";
 import {getUserByEmail} from "../../actions/user_actions";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
     
     const dispatch = useDispatch();
     const users = useSelector(state => state.users)
     useEffect(() => {
-        getUserByEmail(dispatch, "rajat@mail.com");
+        getUserByEmail(dispatch, users.email);
     }, []);
-    console.log(users);
+    console.log("User Profile:",users);
 
     return (
         <>
-            {
-                users.map((u) => {
-                    return (
-                        <div>
-                            <span>{u.details.name}</span>
-                        </div>
-                    );
-                })
-            }
+            <p>{users.name}</p>
+            <p>{users.email}</p>
+            <Link to="/editProfile"><button type="button">Edit Profile</button></Link>
         </>
     );
 }

@@ -14,7 +14,19 @@ export const getUserById = async (id) => {
     return response.data;
 }
 
-export const updateUser = async (user, uid) => {
-    const response = await axios.post(`${USER_API}/${uid}`, user)
+export const updateUser = async (user) => {
+    const response = await axios.put(`${USER_API}/${user._id}`, user)
+    return response.data;
+}
+
+export const createUser = async (user) => {
+    console.log("Service :",user)
+    const response = await axios.post(`${USER_API}/createUser`, user)
+    return response.data;
+}
+
+export const loginUser = async (loginUser) => {
+    console.log("Logging the user in", loginUser);
+    const response = await axios.post(`${USER_API}/loginUser`, loginUser);
     return response.data;
 }
