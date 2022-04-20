@@ -3,17 +3,28 @@ import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import '../../config.js';
+import './index.css';
 
 const Recipe = () => {
 
     const [recipe, setRecipe] = useState({
-        title:'',
-        summary:'',
-        image:''
+                                             title:'',
+                                             summary:'',
+                                             image:'',
+                                             instructions:'',
+                                             extendedIngredients:[]
+
                                          });
+
+    const [similarID, setSimilarID] = useState([]);
+
+    const [similar, setSimilar] = useState([]);
+
     const params = useParams();
 
     const apiKey = global.config.apiKeys.key1;
+
+    let similarList = [];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,27 +35,63 @@ const Recipe = () => {
             const recipeData = await response.json()
             setRecipe(recipeData)
             console.log(recipeData);
+
+            const response2 = await fetch(
+                `https://api.spoonacular.com/recipes/${params.id}/similar?apiKey=${apiKey}&number=3`)
+
+            const similarData = await response2.json()
+            setSimilarID(similarData)
+            console.log("Similar Data:")
+            console.log(similarData);
+
+
+
         }
         fetchData()
     }, [])
 
-
     return(
-        <Container>
-            <h3>{recipe.title}</h3>
-                {
-                    <Col>
-                        <Card >
-                            <Card.Img src={recipe.image} />
+        <div className={"container-fluid"}>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.title} <a className={"savelink"} href={""}>Save</a></h1>
 
-                            <Card.Body>
-                                <Card.Title>{recipe.title}</Card.Title>
-                                <Card.Text>{Parser (recipe.summary)}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+            <img className={"image"} src={recipe.image}/>
+
+            <h3 className={"mt-4"}>Summary:</h3>
+            <p>{Parser (recipe.summary)}</p>
+
+            <h3 className={"mt-4"}>Instructions:</h3>
+            <p>{Parser (recipe.instructions)}</p>
+
+            <h3 className={"mt-4"}>Ingredients:</h3>
+
+            <ul className="list-group">
+
+                {
+                    recipe.extendedIngredients.map((recipe, k) => (
+
+                    <li className="list-group-item">{recipe.original}</li>
+                ))
                 }
-        </Container>
+
+            </ul>
+
+
+            <h3 className="mt-4 mb-4">Similar Recipes:</h3>
+
+            <ul className="list-group mb-5">
+
+                {
+                    similarID.map((recipe, k) => (
+                        <a href={'http://localhost:3000/recipe/' + recipe.id}>
+                            <li className="list-group-item"><span className={"color-green"}>{recipe.title}</span></li>
+                        </a>
+                    ))
+                }
+
+            </ul>
+
+
+        </div>
     )
 }
 export default Recipe;

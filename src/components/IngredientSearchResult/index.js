@@ -4,18 +4,18 @@ import Parser from 'html-react-parser';
 import {useParams} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"
-const SearchResult = () => {
+const IngredientSearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
     const params = useParams();
     const apiKey = global.config.apiKeys.key1;
 
-
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(
-                `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=12&apiKey=${apiKey}`)
+                `https://api.spoonacular.com/food/ingredients/search?query=${params.query}&number=10&sortDirection=desc&apiKey=${apiKey}`)
             const recipeData = await response.json()
+            console.log(recipeData.results);
             setRecipe(recipeData.results);
         }
 
@@ -26,24 +26,21 @@ const SearchResult = () => {
         <Container>
             <h3 className="mt-3">Search Results</h3>
             <Row>
-                {recipe.map((recipe, k) => (
-                    <Col key={k} xs={12} md={4} lg={3} className="mt-3">
-                        <Card >
-                            <Card.Img src={recipe.image} />
+                <ul className="list-group">
 
-                            <Card.Body>
-                                <a href={'http://localhost:3000/recipe/' + recipe.id}>
-                                    <Card.Title>{recipe.title}</Card.Title>
-                                </a>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                {recipe.map((recipe, k) => (
+                        <a href={'http://localhost:3000/ingredient/' + recipe.id}>
+                            <li className="list-group-item">{recipe.name}</li>
+                        </a>
                 ))}
+
+                </ul>
+
             </Row>
 
         </Container>
     )
 }
 
-export default SearchResult;
+export default IngredientSearchResult;
 
