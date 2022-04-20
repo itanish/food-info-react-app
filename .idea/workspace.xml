@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e18719f6-c69d-40cc-bada-ccb4b9ac0923" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchResult/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/IngredientSearch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IngredientSearch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/IngredientSearchResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IngredientSearchResult/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Recipe/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Recipe/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +34,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="27osl6tNF6nLY08RZUCNZlFyUwR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,7 +44,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/IngredientSearch" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Ingredient" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -50,6 +55,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/Ingredient" />
+      <recent name="$PROJECT_DIR$/src/components/IngredientSearchResult" />
       <recent name="$PROJECT_DIR$/src/components/IngredientSearch" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
@@ -63,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649997920597</updated>
       <workItem from="1649997923909" duration="8919000" />
-      <workItem from="1650317213157" duration="6587000" />
+      <workItem from="1650317213157" duration="15104000" />
     </task>
     <servers />
   </component>
@@ -75,7 +82,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

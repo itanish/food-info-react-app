@@ -6,7 +6,9 @@ import Recipe from "./components/Recipe";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Col, Container } from "react-bootstrap";
 import SearchResult from "./components/SearchResult";
+import IngredientSearchResult from "./components/IngredientSearchResult"
 import UserProfile from "./components/profile/user_profile";
+import Ingredient from "./components/Ingredient"
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import userReducer from "./reducers/user-reducer";
@@ -25,6 +27,8 @@ function App() {
               <Route path="search/:query" element={<SearchResult />} />
               <Route path="recipe/:id" element={<Recipe />} />
               <Route path="profile" element={<UserProfile />} />
+              <Route path="itemsearch/:query" element={<IngredientSearchResult />} />
+              <Route path="ingredient/:id" element={<Ingredient />} />
             </Route>
           </Routes>
         </div>

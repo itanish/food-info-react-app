@@ -8,7 +8,7 @@ const IngredientsSearch = () => {
     const [input, setInput] = useState('');
 
     const routeChange = () =>{
-        let path = `foodsearch/${input}`;
+        let path = `itemsearch/${input}`;
         navigate(path);
     }
 
@@ -29,7 +29,6 @@ const IngredientsSearch = () => {
                                 onClick={routeChange}>
                             Search
                         </button>
-
                     </div>
                 </div>
             </div>
