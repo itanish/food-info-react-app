@@ -1,6 +1,6 @@
 import { loginUser } from "../../actions/user_actions";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
     }
 
     const login = () => {
-        console.log("Login BUtton click", loginDetails)
+        // console.log("Login BUtton click", loginDetails)
         loginUser(dispatch, loginDetails);
         navigate("/");
     }
