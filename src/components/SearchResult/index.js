@@ -4,6 +4,7 @@ import Parser from 'html-react-parser';
 import {useParams} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"
+import { Link } from "react-router-dom";
 const SearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
@@ -32,9 +33,9 @@ const SearchResult = () => {
                             <Card.Img src={recipe.image} />
 
                             <Card.Body>
-                                <a href={'http://localhost:3000/recipe/' + recipe.id}>
+                                <Link to={'../../recipe/' + recipe.id}>
                                     <Card.Title>{recipe.title}</Card.Title>
-                                </a>
+                                </Link>
                             </Card.Body>
                         </Card>
                     </Col>

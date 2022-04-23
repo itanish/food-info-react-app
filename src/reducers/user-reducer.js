@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const userReducer = (state = [], action) => {
     switch (action.type) {
       case "LOGIN_USER":
@@ -11,6 +13,9 @@ const userReducer = (state = [], action) => {
         state = action.user;
         return state;
       case "CREATE_USER":
+        return state;
+      case 'ADD_RECIPE':
+        state = action.user;
         return state;
       default:
         return state;

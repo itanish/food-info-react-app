@@ -1,11 +1,16 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import '../../config.js';
 import './index.css';
+import { saveRecipe } from "../../actions/user_actions.js";
+
 
 const Recipe = () => {
+    const users = useSelector(state => state.users);
+    const dispatch = useDispatch();    
 
     const [recipe, setRecipe] = useState({
                                              title:'',
@@ -23,6 +28,24 @@ const Recipe = () => {
     const params = useParams();
 
     const apiKey = global.config.apiKeys.key1;
+
+    const saveToUser = (id) => {
+        console.log(users);
+        // TODO local storage use
+        
+        if(users.recipe===undefined) {
+            users.recipe = [];
+        }
+
+        if(!users.recipe.includes(id)) {
+            console.log('saving');
+            users.recipe.push(id);
+            saveRecipe(dispatch,users);
+        }
+        else{
+            console.log('not saving');
+        }
+    }
 
     let similarList = [];
 
@@ -52,7 +75,7 @@ const Recipe = () => {
 
     return(
         <div className={"container-fluid"}>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.title} <a className={"savelink"} href={""}>Save</a></h1>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.title} <button className="btn btn-light" onClick={() => saveToUser(params.id)}>Save</button></h1>
 
             <img className={"image"} src={recipe.image}/>
 

@@ -30,6 +30,9 @@ const UserProfile = () => {
             <p>{users.name}</p>
             <p>{users.email}</p>
             <Link to="/editProfile"><button type="button">Edit Profile</button></Link>
+            <Link to="/"><button type="button">Home</button></Link>
+            <Link to="/addmeal"><button type="button">Add Meal</button></Link>
+
         </>
     );
 }
