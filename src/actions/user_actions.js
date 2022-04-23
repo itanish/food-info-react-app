@@ -27,8 +27,10 @@ export const updateUser = async (dispatch, user) => {
     
     dispatch({
         type: 'UPDATE_USER',
-        user: newUser
+        user: user
     })
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+    
 }
 
 export const createUser = async (dispatch, user) => {
@@ -57,6 +59,14 @@ export const loginUser = async (dispatch, loginUser) => {
     })
 }
 
+
 export const addMeal = async (dispatch, meal) => {
     const meals = await service.addMeal(meal);
+}
+
+export const logoutUser = (dispatch) => {
+    localStorage.removeItem("loggedInUser");
+    dispatch({
+      type: "LOGOUT_USER",
+    });
 }

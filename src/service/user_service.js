@@ -27,7 +27,7 @@ export const createUser = async (user) => {
 }
 
 export const loginUser = async (loginUser) => {
-    console.log("Logging the user in", loginUser);
+    // console.log("Logging the user in", loginUser);
     const response = await axios.post(`${USER_API}/loginUser`, loginUser);
     return response.data;
 }
@@ -43,3 +43,13 @@ export const addMeal = async (meal) => {
     const response = await axios.post(`${MEAL_API}/addMeal`, meal)
     return response.data;
 }
+
+export const loadState = () => {
+  try {
+    const userDetails = localStorage.getItem("loggedInUser");
+    return JSON.parse(userDetails);
+  } catch {
+    return undefined;
+  }
+}
+
