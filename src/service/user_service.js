@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_BASE = "http://localhost:4000/api"
 const USER_API = `${API_BASE}/users`;
+const MEAL_API = `${API_BASE}/meals`;
 
 export const getUserByEmail = async (email) => {
     console.log(`${USER_API}/${email}`)
@@ -28,5 +29,17 @@ export const createUser = async (user) => {
 export const loginUser = async (loginUser) => {
     console.log("Logging the user in", loginUser);
     const response = await axios.post(`${USER_API}/loginUser`, loginUser);
+    return response.data;
+}
+
+export const addRecipe = async (user) => {
+    
+    const response = await axios.post(`${USER_API}/addRecipe`, user)
+    return response.data;
+}
+
+export const addMeal = async (meal) => {
+    
+    const response = await axios.post(`${MEAL_API}/addMeal`, meal)
     return response.data;
 }

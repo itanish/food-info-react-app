@@ -10,6 +10,10 @@ const Register = () => {
         createUser(dispatch,user);
     }
 
+    const onValueChange = (event) => {
+        user.userType = event.target.value;
+    }
+
     const nameOnChangeHandler = (name) => {
         user.name = name;
     }
@@ -41,6 +45,16 @@ const Register = () => {
                     <input className="form__input" type="password"  id="password" placeholder="Password" onChange={(event) => {
                     passwordOnChangeHandler(event.target.value);
                 }}/>
+                </div>
+                <div className="userType">
+                    <span>How do you want to sign up: </span>
+                    <input type="radio" className="wd-inputRadio" name="userType" value="user" 
+              onChange={(event) => onValueChange(event)}></input>
+                    <label className="wd-radio" for="userType">User </label>
+                    <input type="radio" className="wd-inputRadio" name="userType" value="nutritionist"
+              onChange={(event) => onValueChange(event)}></input>
+                    <label className="wd-radio" for="userType">Nutritionist  </label>
+                    
                 </div>
             </div>
             <div className="footer">

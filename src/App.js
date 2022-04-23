@@ -14,6 +14,7 @@ import userReducer from "./reducers/user-reducer";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import EditUserProfile from "./components/EditUserProfile";
+import AddMeal from "./components/AddMeal";
 
 function App() {
   const reducer = combineReducers({ users: userReducer });
@@ -33,6 +34,7 @@ function App() {
               <Route path="profile" element={<UserProfile />} />
               <Route path="itemsearch/:query" element={<IngredientSearchResult />} />
               <Route path="ingredient/:id" element={<Ingredient />} />
+              <Route path="addmeal" element={<AddMeal />} />
               <Route path="editProfile" element={<EditUserProfile />} />
             </Route>
           </Routes>

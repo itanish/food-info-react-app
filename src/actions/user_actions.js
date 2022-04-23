@@ -24,6 +24,7 @@ export const getUserByEmail = async (dispatch, email) => {
 
 export const updateUser = async (dispatch, user) => {
     const newUser = await service.updateUser(user);
+    
     dispatch({
         type: 'UPDATE_USER',
         user: newUser
@@ -38,10 +39,24 @@ export const createUser = async (dispatch, user) => {
     })
 }
 
+export const saveRecipe = async (dispatch, user) => {
+    const newUserRecipe = await service.addRecipe(user);
+    dispatch({
+        type: 'ADD_RECIPE',
+        userRecipe: newUserRecipe
+    })
+}
+
+
 export const loginUser = async (dispatch, loginUser) => {
     const loggedInUser = await service.loginUser(loginUser);
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
     dispatch({
         type: 'LOGIN_USER',
         user : loggedInUser
     })
+}
+
+export const addMeal = async (dispatch, meal) => {
+    const meals = await service.addMeal(meal);
 }

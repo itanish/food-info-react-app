@@ -32,11 +32,11 @@ const EditUserusers = () => {
         <div>
                 <div className="row mb-2">
                     <div className="col-1">
-                        <Link to="/tuiter/users"><span className="text-white"><i class="fa fa-solid fa-window-close"></i></span></Link>
+                        <Link to="/"><span className="text-white"><i class="fa fa-solid fa-window-close"></i></span></Link>
                     </div>
                     <div className="col-11">
                     <span className="text-white"> <strong className="text-white">Edit users</strong></span>
-                    <Link to="/tuiter/users"><button type="button" onClick={() => saveusers()} class="btn btn-light btn-sm float-end wd-button-save">Save</button></Link>
+                    <Link to="/"><button type="button" onClick={() => saveusers()} class="btn btn-light btn-sm float-end wd-button-save">Save</button></Link>
                     </div>
                     
                 </div>
