@@ -30,3 +30,12 @@ export const loginUser = async (loginUser) => {
     const response = await axios.post(`${USER_API}/loginUser`, loginUser);
     return response.data;
 }
+
+export const loadState = () => {
+  try {
+    const userDetails = localStorage.getItem("loggedInUser");
+    return JSON.parse(userDetails);
+  } catch {
+    return undefined;
+  }
+};

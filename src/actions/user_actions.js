@@ -47,3 +47,10 @@ export const loginUser = async (dispatch, loginUser) => {
         user : loggedInUser
     })
 }
+
+export const logoutUser = (dispatch) => {
+    localStorage.removeItem("loggedInUser");
+    dispatch({
+      type: "LOGOUT_USER",
+    });
+}

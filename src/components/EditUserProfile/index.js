@@ -3,11 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { updateUser } from "../../actions/user_actions";
 import NavigationBar from "../NavigationBar";
+import { useEffect } from "react";
+import { loadState } from "../../service/user_service";
 
 const EditUserusers = () => {
     const users = useSelector(state => state.users);
     const dispatch = useDispatch();
     const naigate = useNavigate();
+
+    useEffect(() => {
+      const userDetails = loadState();
+      // console.log(userDetails);
+      if (userDetails !== undefined && userDetails !== null) {
+        dispatch({
+          type: "LOGIN_USER",
+          user: userDetails,
+        });
+      }
+    }, []);
+
     
     const saveusers = () => {
         console.log("Saving")

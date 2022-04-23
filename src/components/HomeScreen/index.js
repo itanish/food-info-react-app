@@ -4,19 +4,11 @@ import NavigationBar from "../NavigationBar";
 import IngredientsSearch from "../IngredientSearch"
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { loadState } from "../../service/user_service";
 
 const HomeScreen = () => {
     
     const dispatch = useDispatch();
-
-    const loadState = () => {
-        try {
-            const userDetails = localStorage.getItem("loggedInUser");
-            return JSON.parse(userDetails);
-        } catch {
-            return undefined;
-        }
-    }
 
     useEffect(() => {
         const userDetails = loadState();
