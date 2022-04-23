@@ -1,10 +1,12 @@
 import { loginUser } from "../../actions/user_actions";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
     let loginDetails  = {}
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const emailOnChangeHandler =(email) => {
         loginDetails.email = email;
     }
@@ -14,8 +16,9 @@ const Login = () => {
     }
 
     const login = () => {
-        console.log("Login BUtton click", loginDetails)
+        // console.log("Login BUtton click", loginDetails)
         loginUser(dispatch, loginDetails);
+        navigate("/");
     }
 
     return(
@@ -31,7 +34,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="footer">
-                <Link to="/profile"><button type="button" class="btn btn-primary" onClick={login}>Login</button></Link>
+                <button type="button" class="btn btn-primary" onClick={login}>Login</button>
             </div>
         </div>      
       )

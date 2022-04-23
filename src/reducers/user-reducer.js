@@ -2,6 +2,7 @@ const userReducer = (state = [], action) => {
     switch (action.type) {
         case 'LOGIN_USER':
             state = action.user;
+            localStorage.setItem('loggedInUser',JSON.stringify(state));
             return state;
         case 'UPDATE_USER':
             state = action.user;

@@ -26,8 +26,10 @@ export const updateUser = async (dispatch, user) => {
     const newUser = await service.updateUser(user);
     dispatch({
         type: 'UPDATE_USER',
-        user: newUser
+        user: user
     })
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+    
 }
 
 export const createUser = async (dispatch, user) => {
