@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import {Link} from "react-router-dom";
 import { logoutUser } from "../../actions/user_actions";
+import './bar.css';
 
 const renderLoggedInUserDetails = (userDetails, dispatch) => {
     console.log("nav bar", userDetails);
