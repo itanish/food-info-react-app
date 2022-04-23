@@ -4,14 +4,24 @@ import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import { Link } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
+import { loadState } from "../../service/user_service";
 
 const UserProfile = () => {
     
     const dispatch = useDispatch();
     const users = useSelector(state => state.users)
+    
     useEffect(() => {
-        getUserByEmail(dispatch, users._id);
+      const userDetails = loadState();
+      // console.log(userDetails);
+      if (userDetails !== undefined && userDetails !== null) {
+        dispatch({
+          type: "LOGIN_USER",
+          user: userDetails,
+        });
+      }
     }, []);
+
     console.log("User Profile:",users);
 
     return (
