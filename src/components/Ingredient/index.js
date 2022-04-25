@@ -4,6 +4,7 @@ import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import '../../config.js';
 import './index.css';
+import NavigationBar from "../NavigationBar";
 
 const Ingredient = () => {
 
@@ -32,6 +33,7 @@ const Ingredient = () => {
 
     return(
         <Container>
+            <NavigationBar/>
             <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name}</h2>
 
             <h4> Estimated Cost: {ingredient.estimatedCost.value} {ingredient.estimatedCost.unit}</h4>

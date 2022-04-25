@@ -8,12 +8,15 @@ const AddMeal = () => {
     const dispatch = useDispatch();
 
     const registerUser = () => {
+        let user = localStorage.getItem('loggedInUser')
+        meal.nutritionist = JSON.parse(user)._id;
+        meal.nutritionist_name = JSON.parse(user).name;
         console.log(meal)
         addMeal(dispatch,meal);
     }
 
-    const idOnChangeHandler = (userid) => {
-        meal.userid = userid;
+    const idOnChangeHandler = (name) => {
+        meal.name = name;
     }
 
     const recipeOnChangeHandler = (recipe) => {
@@ -24,13 +27,13 @@ const AddMeal = () => {
         <div className="form">
             <div className="form-body">
                 <div className="username">
-                    <label className="form__label" for="userId">UserId </label>
-                    <input className="form__input" type="text" id="userId" placeholder="UserId" onChange={(event) => {
+                    <label className="form__label" for="name">Meal Name: </label>
+                    <input className="form__input" type="text" id="userId" placeholder="Meal Name" onChange={(event) => {
                     idOnChangeHandler(event.target.value);
                 }}/>
                 </div>
                 <div className="recipeIds">
-                    <label className="form__label" for="recipeIds">Recipe Ids </label>
+                    <label className="form__label" for="recipeIds">Recipe Ids: </label>
                     <input  type="text" id="recipeIds" className="form__input" placeholder="Recipe Ids (seperated by comma)" onChange={(event) => {
                     recipeOnChangeHandler(event.target.value);
                 }}/>

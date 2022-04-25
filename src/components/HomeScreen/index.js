@@ -26,8 +26,8 @@ const HomeScreen = () => {
         <div>
             <NavigationBar/>
             <Search/>
-            {/*<RandomRecipes/>*/}
-            <IngredientsSearch/>
+            <RandomRecipes/>
+            < IngredientsSearch/>
 
         </div>
     )

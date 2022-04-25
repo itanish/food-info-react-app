@@ -4,6 +4,8 @@ import Parser from 'html-react-parser';
 import {useParams} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"
+import NavigationBar from "../NavigationBar";
+
 const IngredientSearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
@@ -24,6 +26,7 @@ const IngredientSearchResult = () => {
 
     return(
         <Container>
+            <NavigationBar/>
             <h3 className="mt-3">Search Results</h3>
             <Row>
                 <ul className="list-group">

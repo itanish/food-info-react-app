@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 import '../../config.js';
 import './index.css';
 import { saveRecipe } from "../../actions/user_actions.js";
-
+import {Link} from 'react-router-dom'
+import NavigationBar from "../NavigationBar";
 
 const Recipe = () => {
     const users = useSelector(state => state.users);
@@ -75,6 +76,7 @@ const Recipe = () => {
 
     return(
         <div className={"container-fluid"}>
+            <NavigationBar/>
             <h1 className={"heading mt-4 mb-4"}>{recipe.title} <button className="btn btn-light" onClick={() => saveToUser(params.id)}>Save</button></h1>
 
             <img className={"image"} src={recipe.image}/>
@@ -91,18 +93,17 @@ const Recipe = () => {
 
                 {
                     recipe.extendedIngredients.map((recipe, k) => (
-
-                    <li className="list-group-item">{recipe.original}</li>
+                        <a href={'http://localhost:3000/ingredient/' + recipe.id}>
+                        <li className="list-group-item">{recipe.original}</li>
+                        </a>
                 ))
                 }
 
             </ul>
 
-
             <h3 className="mt-4 mb-4">Similar Recipes:</h3>
 
             <ul className="list-group mb-5">
-
                 {
                     similarID.map((recipe, k) => (
                         <a href={'http://localhost:3000/recipe/' + recipe.id}>
@@ -110,7 +111,6 @@ const Recipe = () => {
                         </a>
                     ))
                 }
-
             </ul>
 
 

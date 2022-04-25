@@ -5,6 +5,8 @@ import {useParams} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"
 import { Link } from "react-router-dom";
+import NavigationBar from "../NavigationBar";
+
 const SearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
@@ -25,6 +27,7 @@ const SearchResult = () => {
 
     return(
         <Container>
+            <NavigationBar/>
             <h3 className="mt-3">Search Results</h3>
             <Row>
                 {recipe.map((recipe, k) => (
