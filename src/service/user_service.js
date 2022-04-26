@@ -10,8 +10,8 @@ export const getUserByEmail = async (email) => {
     return response.data;
 }
 
-export const getUserById = async (id) => {
-    const response = await axios.get(`${USER_API}/${id}`)
+export const getUserByName = async(name) => {
+    const response = await axios.get(`${USER_API}/name/${name}`);
     return response.data;
 }
 

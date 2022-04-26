@@ -5,14 +5,6 @@ export const GET_USER_BY_EMAIL = 'GET_USER_BY_EMAIL';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 
-export const getUserById = async (dispatch, id) => {
-    const userById = await service.getUserById(id);
-    dispatch({
-        type: 'USER_DETAILS',
-        user : userById
-    })
-}
-
 export const getUserByEmail = async (dispatch, email) => {
     const userByEmail = await service.getUserByEmail(email);
     console.log(userByEmail)

@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import { Card, Row, Col, Container } from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 import { loadState } from "../../service/user_service";
 import "./profile.css"
@@ -39,6 +39,14 @@ const UserProfile = () => {
     
     const dispatch = useDispatch();
     const users = useSelector(state => state.users)
+    let navigate = useNavigate();
+    const [input, setInput] = useState("");
+
+    const routeChange = () => {
+      let path = `searchUsers/${input}`;
+      navigate(path);
+    };
+
 
     const [recipe, setRecipe] = useState([{
       title: "",
@@ -81,12 +89,36 @@ const UserProfile = () => {
     return (
       <>
         <NavigationBar />
+        
+        {/* This is the start of the search bar */}
+        <div>
+          <div className="row height d-flex justify-content-center align-items-center">
+            <div className="col-md-8 mt-5 mb-5">
+              <div className="search">
+                <i className="fa fa-search"></i>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search for fellow users!"
+                  value={input}
+                  onInput={(e) => setInput(e.target.value)}
+                />
+
+                <button className="btn btn-primary" onClick={routeChange}>
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* This is the end of the search bar */}
+
         <div class="container rounded bg-white mt-5 mb-5">
           <div class="row">
             <div class="col-md-3 border-right">
               <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img
-                  alt = "Profile"
+                  alt="Profile"
                   class="rounded-circle mt-5"
                   width="150px"
                   src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
