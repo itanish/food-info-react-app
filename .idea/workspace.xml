@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e18719f6-c69d-40cc-bada-ccb4b9ac0923" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/user_actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/user_actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddMeal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddMeal/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/HomeScreen/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeScreen/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MealByMe/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MealByMe/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/MealByMe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/MealsBar" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -51,11 +56,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/MealsBar" />
+      <recent name="$PROJECT_DIR$/src/components/Meal" />
+      <recent name="$PROJECT_DIR$/src/components/AllMeal" />
       <recent name="$PROJECT_DIR$/src/components/MealByMe" />
       <recent name="$PROJECT_DIR$/src/components/Ingredient" />
-      <recent name="$PROJECT_DIR$/src/components/IngredientSearchResult" />
-      <recent name="$PROJECT_DIR$/src/components/IngredientSearch" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

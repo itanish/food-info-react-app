@@ -6,36 +6,37 @@ import "../../config.js"
 import { Link } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 
-const MealByMe = () => {
+const SearchResult = () => {
 
     const [recipe, setRecipe] = useState([]);
-    const serverURL = global.config.serverURL;
     const params = useParams();
-
+    const serverURL = global.config.serverURL;
+    const apiKey = global.config.apiKeys.key1;
+    
+    
     useEffect(() => {
         const fetchData = async () => {
-
-            const userID = JSON.parse(localStorage.getItem("loggedInUser"))._id;
-
             const response = await fetch(
-                `${serverURL}/api/meals/${userID}`)
-
+                `${serverURL}/api/allmeals/`)
             const recipeData = await response.json()
             setRecipe(recipeData);
+
         }
 
         fetchData()
     }, [])
+    
 
     return(
         <Container>
-
-            <h3 className="mt-3">Meal Plans Created By You:</h3>
-
+            <NavigationBar/>
+            <h3 className="mt-3">All Meal Plans created by our nutritionists</h3>
             <Row>
                 {recipe.map((recipe, k) => (
                     <Col key={k} xs={12} md={4} lg={3} className="mt-3">
                         <Card >
+                            <Card.Img width={100} height={200} src={`https://source.unsplash.com/random/100${k}×100${k}/?food`} />
+
                             <Card.Body>
                                 <Link to={'../../meal/' + recipe._id}>
                                     <Card.Title>{recipe.name}</Card.Title>
@@ -46,11 +47,9 @@ const MealByMe = () => {
                 ))}
             </Row>
 
-            <div className={"mb-5"}></div>
-
         </Container>
     )
 }
 
-export default MealByMe;
+export default SearchResult;
 
