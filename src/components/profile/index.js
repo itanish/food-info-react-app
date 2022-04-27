@@ -17,7 +17,6 @@ const renderLikedRecipes = (recipe) => {
   return (
     <div className={"container-fluid"}>
       <Row>
-        {/* {JSON.stringify(recipe)} */}
         {recipe.map((recipe, k) => (
           <Col key={k} className="mt-3">
             <Card>
@@ -72,7 +71,7 @@ const UserProfile = () => {
             const response = await fetch(`https://api.spoonacular.com/recipes/${rId}/information?apiKey=${apiKey}`);
             const recipeData = await response.json();
             // console.log(recipeData);
-            recipeList.push(JSON.parse(recipeData));
+            recipeList.push(recipeData);
             
           });
           console.log("list", recipeList);
@@ -89,7 +88,7 @@ const UserProfile = () => {
     return (
       <>
         <NavigationBar />
-        
+
         {/* This is the start of the search bar */}
         <div>
           <div className="row height d-flex justify-content-center align-items-center">
@@ -104,9 +103,11 @@ const UserProfile = () => {
                   onInput={(e) => setInput(e.target.value)}
                 />
 
-                <button className="btn btn-primary" onClick={routeChange}>
-                  Search
-                </button>
+                <Link to={`/searchUsers/${input}`}>
+                  <button className="btn btn-primary">
+                    Search
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

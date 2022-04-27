@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import './profile.css';
 import { getUserById } from '../../service/user_service';
@@ -27,7 +27,7 @@ const DifferentUserProfile = () => {
     const [input, setInput] = useState("");
 
     const routeChange = () => {
-      let path = `searchUsers/${input}`;
+      let path = `profile/${input}`;
       navigate(path);
     };
 
