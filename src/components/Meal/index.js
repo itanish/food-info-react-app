@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import '../../config.js';
-import { saveRecipe } from "../../actions/user_actions.js";
 import {Link} from 'react-router-dom'
 import NavigationBar from "../NavigationBar";
 import './index.css';
+import { saveMeal } from "../../actions/user_actions.js";
 
 const Meal = () => {
     const users = useSelector(state => state.users);
@@ -24,7 +24,26 @@ const Meal = () => {
     const params = useParams();
 
     console.log("Meal Page")
-
+    const saveToUser = (id,name) => {
+        if(localStorage.getItem("user")!==null) {
+            if(users.meals===undefined) {
+                users.meals = [];
+            }
+    
+            if(!users.meals.includes(id)) {
+                users.meals.push(id);
+                console.log('saving',users);
+                saveMeal(dispatch,users);
+                
+            }
+            else{
+                console.log('not saving as user already have this meal');
+            }
+        }
+        else {
+            alert("Please login");
+        }
+    }
     useEffect(() => {
         const fetchData = async () => {
 
@@ -42,7 +61,7 @@ const Meal = () => {
     return(
         <div className={"container-fluid"}>
             <NavigationBar/>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.name}</h1>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.name)}>Save</button></h1>
 
             <img className={"image"} src={"https://source.unsplash.com/random/100×100/?food"}/>
 
