@@ -12,6 +12,20 @@ const HomeScreen = () => {
     
     const dispatch = useDispatch();
 
+    const isNutritionist = () => {
+
+        if (localStorage.length > 0) {
+            if (JSON.parse(localStorage.getItem("loggedInUser")).role === "nutritionist") {
+                return true;
+            }
+        }
+
+      return false;
+
+    }
+
+    const isNutritionistRole = isNutritionist()
+
     useEffect(() => {
         const userDetails = loadState();
         // console.log(userDetails);
@@ -29,7 +43,11 @@ const HomeScreen = () => {
             <Search/>
              {/*<RandomRecipes/>*/}
             < IngredientsSearch/>
-            <MealByMe/>
+
+            {isNutritionistRole ?
+             <MealByMe /> :
+             ""
+            }
 
         </div>
     )
