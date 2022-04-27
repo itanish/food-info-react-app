@@ -10,6 +10,12 @@ export const getUserByEmail = async (email) => {
     return response.data;
 }
 
+export const getUserById = async (uid) => {
+  console.log(`${USER_API}/${uid}`);
+  const response = await axios.get(`${USER_API}/${uid}`);
+  return response.data;
+};
+
 export const getUserByName = async(name) => {
     const response = await axios.get(`${USER_API}/name/${name}`);
     return response.data;
