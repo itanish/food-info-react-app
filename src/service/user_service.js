@@ -4,6 +4,7 @@ const API_BASE = "http://localhost:4000/api"
 const USER_API = `${API_BASE}/users`;
 const NUTRITIONIST_API = `${API_BASE}/nutritionist`;
 const MEAL_API = `${API_BASE}/meals`;
+
 const ADMIN_API = `${API_BASE}/admin`;
 
 
@@ -47,6 +48,7 @@ export const getApprovedNutrionists = async () => {
 };
 
 export const updateUser = async (user) => {
+    console.log("Update user"+user);
     const response = await axios.put(`${USER_API}/${user._id}`, user)
     return response.data;
 }
@@ -72,6 +74,11 @@ export const loginAdmin = async (loginUser) => {
 export const addRecipe = async (user) => {
     
     const response = await axios.post(`${USER_API}/addRecipe`, user)
+    return response.data;
+}
+
+export const addUserMeal = async (user) => {
+    const response = await axios.post(`${USER_API}/addUserMeal`, user)
     return response.data;
 }
 

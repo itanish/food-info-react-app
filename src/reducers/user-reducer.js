@@ -17,6 +17,9 @@ const userReducer = (state = [], action) => {
       case 'ADD_RECIPE':
         state = action.user;
         return state;
+      case 'ADD_MEAL':
+        state = action.user;
+        return state;
       default:
         return state;
     }

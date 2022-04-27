@@ -25,7 +25,6 @@ export const loginForAdmin = async (dispatch, adminUser) => {
 
 export const updateUser = async (dispatch, user) => {
     const newUser = await service.updateUser(user);
-    
     dispatch({
         type: 'UPDATE_USER',
         user: user
@@ -47,6 +46,14 @@ export const saveRecipe = async (dispatch, user) => {
     dispatch({
         type: 'ADD_RECIPE',
         userRecipe: newUserRecipe
+    })
+}
+
+export const saveMeal = async (dispatch, user) => {
+    const newUserMeal = await service.addUserMeal(user);
+    dispatch({
+        type: 'ADD_MEAL',
+        userRecipe: newUserMeal
     })
 }
 
