@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import '../../config.js';
 import './index.css';
 import { saveRecipe } from "../../actions/user_actions.js";
+import { saveUserForRecipe } from "../../service/recipe_service.js";
 import {Link} from 'react-router-dom'
 import NavigationBar from "../NavigationBar";
 
@@ -30,21 +31,34 @@ const Recipe = () => {
 
     const apiKey = global.config.apiKeys.key1;
 
-    const saveToUser = (id) => {
+    const saveToUser = (id, recipe) => {
         console.log(users);
         // TODO local storage use
-        
-        if(users.recipe===undefined) {
-            users.recipe = [];
+        if(localStorage.getItem("user")!==null) {
+            if(users.recipe===undefined) {
+                users.recipe = [];
+            }
+    
+            if(!users.recipe.includes(id)) {
+                console.log('saving');
+                users.recipe.push(id);
+                saveRecipe(dispatch,users);
+                
+                let recipes = {};
+                recipes.recipeId = id;
+                recipes.recipeName = recipe;
+                recipes.likedByName = JSON.parse(localStorage.getItem("user")).name;
+                
+                console.log("Recipe adding user " +recipes);
+                console.log(recipes);
+                saveUserForRecipe(recipes);
+            }
+            else{
+                console.log('not saving as user already have it');
+            }
         }
-
-        if(!users.recipe.includes(id)) {
-            console.log('saving');
-            users.recipe.push(id);
-            saveRecipe(dispatch,users);
-        }
-        else{
-            console.log('not saving');
+        else {
+            alert("Please login");
         }
     }
 
@@ -77,7 +91,7 @@ const Recipe = () => {
     return(
         <div className={"container-fluid"}>
             <NavigationBar/>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.title} <button className="btn btn-light" onClick={() => saveToUser(params.id)}>Save</button></h1>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.title} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.title)}>Save</button></h1>
 
             <img className={"image"} src={recipe.image}/>
 

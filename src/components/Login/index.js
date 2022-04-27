@@ -20,9 +20,15 @@ const Login = () => {
 
 
     const login = () => {
-
-        loginUser(dispatch, loginDetails);
-        navigate("/");
+        loginUser(dispatch, loginDetails).then(() => {
+            //console.log(localStorage.getItem("user")+" hereeeee");
+            if(localStorage.getItem("user")===null) {
+                alert("Invalid Credentials")
+            }
+            else {
+                navigate("/");
+            }
+        });
     }
 
     return(

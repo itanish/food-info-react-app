@@ -8,7 +8,7 @@ const AddMeal = () => {
     const dispatch = useDispatch();
 
     const registerUser = () => {
-        let user = localStorage.getItem('loggedInUser')
+        let user = localStorage.getItem('user')
         meal.nutritionist = JSON.parse(user)._id;
         meal.nutritionist_name = JSON.parse(user).name;
         console.log(meal)

@@ -3,6 +3,7 @@ import axios from 'axios';
 const API_BASE = "http://localhost:4000/api"
 const USER_API = `${API_BASE}/users`;
 const MEAL_API = `${API_BASE}/meals`;
+const RECIPE_API = '${API_BASE}/recipe';
 
 export const getUserByEmail = async (email) => {
     console.log(`${USER_API}/${email}`)
@@ -52,7 +53,7 @@ export const addMeal = async (meal) => {
 
 export const loadState = () => {
   try {
-    const userDetails = localStorage.getItem("loggedInUser");
+    const userDetails = localStorage.getItem("user");
     return JSON.parse(userDetails);
   } catch {
     return undefined;
