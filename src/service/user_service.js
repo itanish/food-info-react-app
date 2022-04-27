@@ -49,6 +49,11 @@ export const addMeal = async (meal) => {
     const response = await axios.post(`${MEAL_API}/addMeal`, meal)
     return response.data;
 }
+export const getMeal = async (nutritionist) => {
+
+    const response = await axios.post(`${MEAL_API}/addMeal${nutritionist}`,)
+    return response.data;
+}
 
 export const loadState = () => {
   try {

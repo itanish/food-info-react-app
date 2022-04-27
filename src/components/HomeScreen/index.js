@@ -2,6 +2,7 @@ import RandomRecipes from "../RandomRecipes";
 import Search from "../Search";
 import NavigationBar from "../NavigationBar";
 import IngredientsSearch from "../IngredientSearch"
+import MealByMe from "../MealByMe"
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadState } from "../../service/user_service";
@@ -26,8 +27,9 @@ const HomeScreen = () => {
         <div>
             <NavigationBar/>
             <Search/>
-            {/* <RandomRecipes/> */}
+             {/*<RandomRecipes/>*/}
             < IngredientsSearch/>
+            <MealByMe/>
 
         </div>
     )

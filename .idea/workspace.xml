@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e18719f6-c69d-40cc-bada-ccb4b9ac0923" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/MealByMe/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AddMeal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddMeal/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/HomeScreen/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeScreen/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Ingredient/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Ingredient/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/IngredientSearchResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IngredientSearchResult/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Recipe/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Recipe/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchResult/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/user_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/user_service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +44,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Ingredient" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/MealByMe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -56,6 +55,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/MealByMe" />
       <recent name="$PROJECT_DIR$/src/components/Ingredient" />
       <recent name="$PROJECT_DIR$/src/components/IngredientSearchResult" />
       <recent name="$PROJECT_DIR$/src/components/IngredientSearch" />

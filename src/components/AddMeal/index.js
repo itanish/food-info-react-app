@@ -1,6 +1,7 @@
 import './style.css'
 import { addMeal } from '../../actions/user_actions'
 import { useDispatch } from 'react-redux'
+import Navigation from "../NavigationBar";
 
 const AddMeal = () => {
     let meal = {}
@@ -13,6 +14,7 @@ const AddMeal = () => {
         meal.nutritionist_name = JSON.parse(user).name;
         console.log(meal)
         addMeal(dispatch,meal);
+        alert("Meal Added!");
     }
 
     const idOnChangeHandler = (name) => {
@@ -20,10 +22,12 @@ const AddMeal = () => {
     }
 
     const recipeOnChangeHandler = (recipe) => {
-        meal.recipe = recipe;
+        meal.recipe = "[" + recipe + "]";
     }
 
     return(
+        <>
+        <Navigation/>
         <div className="form">
             <div className="form-body">
                 <div className="username">
@@ -43,7 +47,8 @@ const AddMeal = () => {
             <div className="footer">
                 <button onClick={() => registerUser()} type="button" class="btn btn-primary">Add Meal Plan</button>
             </div>
-        </div>      
+        </div>
+        </>
       )
 }
 export default AddMeal;
