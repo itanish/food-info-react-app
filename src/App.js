@@ -16,6 +16,7 @@ import Login from "./components/Login";
 import EditUserProfile from "./components/EditUserProfile";
 import AddMeal from "./components/AddMeal";
 import SearchUser from "./components/SearchUsers";
+import DifferentUserProfile from "./components/DifferentUserProfile";
 
 function App() {
   const reducer = combineReducers({ users: userReducer });
@@ -28,16 +29,26 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<HomeScreen />} />
-              <Route path="register" element={<Register />}/>
-              <Route path="login" element={<Login />}/>
+              <Route path="register" element={<Register />} />
+              <Route path="login" element={<Login />} />
               <Route path="search/:query" element={<SearchResult />} />
               <Route path="recipe/:id" element={<Recipe />} />
               <Route path="profile" element={<UserProfile />} />
-              <Route path="itemsearch/:query" element={<IngredientSearchResult />} />
+              <Route
+                path="itemsearch/:query"
+                element={<IngredientSearchResult />}
+              />
               <Route path="ingredient/:id" element={<Ingredient />} />
               <Route path="addmeal" element={<AddMeal />} />
               <Route path="editProfile" element={<EditUserProfile />} />
-              <Route path="/profile/searchUsers/:name" element={<SearchUser />} />
+              <Route
+                path="/profile/searchUsers/:name"
+                element={<SearchUser />}
+              />
+              <Route
+                path="/profile/:uid"
+                element={<DifferentUserProfile />}
+              />
             </Route>
           </Routes>
         </div>
