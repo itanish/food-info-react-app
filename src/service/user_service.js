@@ -6,6 +6,7 @@ const NUTRITIONIST_API = `${API_BASE}/nutritionist`;
 const MEAL_API = `${API_BASE}/meals`;
 const ADMIN_API = `${API_BASE}/admin`;
 
+
 export const getUserByEmail = async (email) => {
     console.log(`${USER_API}/${email}`)
     const response = await axios.get(`${USER_API}/${email}`)
@@ -87,7 +88,7 @@ export const getMeal = async (nutritionist) => {
 
 export const loadState = () => {
   try {
-    const userDetails = localStorage.getItem("loggedInUser");
+    const userDetails = localStorage.getItem("user");
     return JSON.parse(userDetails);
   } catch {
     return undefined;

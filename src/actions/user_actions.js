@@ -30,7 +30,7 @@ export const updateUser = async (dispatch, user) => {
         type: 'UPDATE_USER',
         user: user
     })
-    localStorage.setItem("loggedInUser", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
     
 }
 
@@ -53,7 +53,9 @@ export const saveRecipe = async (dispatch, user) => {
 
 export const loginUser = async (dispatch, loginUser) => {
     const loggedInUser = await service.loginUser(loginUser);
-    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    if(loggedInUser!=="fail") {
+        localStorage.setItem("user", JSON.stringify(loggedInUser));
+    }
     dispatch({
         type: 'LOGIN_USER',
         user : loggedInUser
