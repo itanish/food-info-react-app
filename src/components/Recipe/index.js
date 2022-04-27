@@ -1,4 +1,4 @@
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Card, Row, Col, Container, Modal, Button } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Parser from 'html-react-parser';
@@ -12,7 +12,8 @@ import NavigationBar from "../NavigationBar";
 
 const Recipe = () => {
     const users = useSelector(state => state.users);
-    const dispatch = useDispatch();    
+    const dispatch = useDispatch();
+    const serverURL = global.config.serverURL;
 
     const [recipe, setRecipe] = useState({
                                              title:'',
@@ -23,9 +24,24 @@ const Recipe = () => {
 
                                          });
 
+
+    const [recipeServer, setRecipeServer] = useState({
+                                                         recipeId:'',
+                                                         likedByName:[],
+                                         });
+
+
+
+
     const [similarID, setSimilarID] = useState([]);
 
     const [similar, setSimilar] = useState([]);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     const params = useParams();
 
@@ -38,17 +54,17 @@ const Recipe = () => {
             if(users.recipe===undefined) {
                 users.recipe = [];
             }
-    
+
             if(!users.recipe.includes(id)) {
                 console.log('saving');
                 users.recipe.push(id);
                 saveRecipe(dispatch,users);
-                
+
                 let recipes = {};
                 recipes.recipeId = id;
                 recipes.recipeName = recipe;
                 recipes.likedByName = JSON.parse(localStorage.getItem("user")).name;
-                
+
                 console.log("Recipe adding user " +recipes);
                 console.log(recipes);
                 saveUserForRecipe(recipes);
@@ -63,6 +79,7 @@ const Recipe = () => {
     }
 
     let similarList = [];
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -79,10 +96,13 @@ const Recipe = () => {
 
             const similarData = await response2.json()
             setSimilarID(similarData)
-            console.log("Similar Data:")
-            console.log(similarData);
 
+            const response3 = await fetch(
+                `${serverURL}/api/recipeserver/${params.id}`)
 
+            const recipeDataServer = await response3.json();
+            setRecipeServer(recipeDataServer[0]);
+            console.log(recipeDataServer)
 
         }
         fetchData()
@@ -91,7 +111,14 @@ const Recipe = () => {
     return(
         <div className={"container-fluid"}>
             <NavigationBar/>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.title} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.title)}>Save</button></h1>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.title}
+                <Button className="primary mr-3" onClick={() => saveToUser(params.id,recipe.title)}>Save
+                </Button>
+                <Button variant="primary ml-3" onClick={handleShow}>
+                    Liked By
+                </Button>
+            </h1>
+
 
             <img className={"image"} src={recipe.image}/>
 
@@ -114,6 +141,28 @@ const Recipe = () => {
                 }
 
             </ul>
+            
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Liked By:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ul className="list-group mb-5">
+                        {
+                            recipeServer.likedByName.map((name, k) => (
+                                <li className="list-group-item"><span className={"color-green"}>{name}</span></li>
+                            ))
+                        }
+                    </ul>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
 
             <h3 className="mt-4 mb-4">Similar Recipes:</h3>
 
