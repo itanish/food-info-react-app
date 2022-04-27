@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getUserByName } from '../../service/user_service';
+import { getLoggedInUserDetails, getUserByName } from '../../service/user_service';
 import { Row, Container, ListGroup, ListGroupItem } from "react-bootstrap";
 import NavigationBar from '../NavigationBar';
 import { useState } from 'react';
@@ -30,9 +30,14 @@ const SearchUser = () => {
           console.log(userDetails);
           return userDetails;
         };
-        getDataFromServer(params["name"]).then((data) => {
-            setAllUsers(data)
-        });
+        const userDetails = getLoggedInUserDetails();
+        if (userDetails === null || userDetails === undefined) {
+          navigate("/login");
+        } else {
+          getDataFromServer(params["name"]).then((data) => {
+              setAllUsers(data)
+          });
+        }
     }, []);
     
     console.log("out", allUsers)

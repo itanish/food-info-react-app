@@ -8,10 +8,12 @@ import {Link} from 'react-router-dom'
 import NavigationBar from "../NavigationBar";
 import './index.css';
 import { saveMeal } from "../../actions/user_actions.js";
+import { useNavigate } from "react-router-dom";
 
 const Meal = () => {
     const users = useSelector(state => state.users);
     const dispatch = useDispatch();    
+    const navigate = useNavigate();
 
     const [recipe, setRecipe] = useState({
                                              name:'',
@@ -41,12 +43,11 @@ const Meal = () => {
             }
         }
         else {
-            alert("Please login");
+            navigate("/login");
         }
     }
     useEffect(() => {
         const fetchData = async () => {
-
             const response = await fetch(
                 `${serverURL}/api/mealData/${params.id}`)
                 
