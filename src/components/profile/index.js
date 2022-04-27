@@ -17,6 +17,7 @@ const renderLikedRecipes = (recipe) => {
   return (
     <div className={"container-fluid"}>
       <Row>
+        {/* {JSON.stringify(recipe)} */}
         {recipe.map((recipe, k) => (
           <Col key={k} className="mt-3">
             <Card>
@@ -66,20 +67,16 @@ const UserProfile = () => {
               user: userDetails,
             });
           }
-          setRecipe([]);
-
-          // Commenting to limit the number of calls to the API
-          
-          // const rId = userDetails.recipe[0];
-          // userDetails.recipe.map(async (rId) => {
-          //   const recipeList = recipe;
-          //   const response = await fetch(`https://api.spoonacular.com/recipes/${rId}/information?apiKey=${apiKey}`);
-          //   const recipeData = await response.json();
-          //   // console.log(recipeData);
-          //   recipeList.push(recipeData);
-          //   console.log("list", recipeList);
-          //   setRecipe(recipeList);  
-          // });
+          const recipeList = recipe;
+          userDetails.recipe.map(async (rId) => {  
+            const response = await fetch(`https://api.spoonacular.com/recipes/${rId}/information?apiKey=${apiKey}`);
+            const recipeData = await response.json();
+            // console.log(recipeData);
+            recipeList.push(JSON.parse(recipeData));
+            
+          });
+          console.log("list", recipeList);
+          setRecipe(recipeList);  
           
         }
         fetchData()
