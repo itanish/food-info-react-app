@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import {Link} from "react-router-dom";
-import { logoutUser } from "../../actions/user_actions";
+import { logoutUser } from "../../../actions/user_actions";
 import './bar.css';
 
 const renderLoggedInUserDetails = (userDetails, dispatch) => {
@@ -34,14 +34,15 @@ const renderLoggedInUserDetails = (userDetails, dispatch) => {
     }
 }
 
-const NavigationBar = () => {
-    const userDetails = useSelector((state) => state.users);
+const AdminNavigationBar = () => {
+    const userDetails = JSON.parse(localStorage.getItem("user"));
+    // console.log(userDetails);
     const dispatch = useDispatch();
     return (
       <div>
         <nav class="navbar navbar-light wd-bg_color">
-          <Link className="navbar-brand" to="/">
-            Food Recommender
+          <Link className="navbar-brand" to="/admin">
+            Food Recommender Admin
           </Link>
           <div className="float-right d-inline-flex">
             {renderLoggedInUserDetails(userDetails, dispatch)}
@@ -51,4 +52,4 @@ const NavigationBar = () => {
     );
 }
 
-export default NavigationBar;
+export default AdminNavigationBar;

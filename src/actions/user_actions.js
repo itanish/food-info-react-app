@@ -14,6 +14,15 @@ export const getUserByEmail = async (dispatch, email) => {
      })
 }
 
+export const loginForAdmin = async (dispatch, adminUser) => {
+    const loggedInAdmin = await service.loginAdmin(adminUser);
+    localStorage.setItem("user", JSON.stringify(loggedInAdmin));
+    dispatch({
+      type: "LOGIN_USER",
+      user: loggedInAdmin,
+    });
+};
+
 export const updateUser = async (dispatch, user) => {
     const newUser = await service.updateUser(user);
     

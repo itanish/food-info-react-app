@@ -1,0 +1,18 @@
+.heading {
+    color: forestgreen;
+}
+
+.image {
+    border: 5px solid forestgreen;
+    width: 500px;
+    height: 400px;
+}
+
+.savelink {
+    font-size: 27px;
+    color: blue !important;
+}
+
+.color-green {
+    color: forestgreen;
+}
