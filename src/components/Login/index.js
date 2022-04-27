@@ -1,7 +1,7 @@
 import { loginUser } from "../../actions/user_actions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import NavigationBar from "../NavigationBar";
 
 const Login = () => {
     let loginDetails  = {}
@@ -32,6 +32,8 @@ const Login = () => {
     }
 
     return(
+        <>
+        <NavigationBar />
         <div className="form">
             <div className="form-body">
                 <div className="email">
@@ -44,7 +46,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="userType">
-                    <span>How do you want to sign up: </span>
+                    <span>How do you want to log in: </span>
                     <input type="radio" className="wd-inputRadio" name="userType" value="user" 
                 onChange={(event) => onValueChange(event)}></input>
                     <label className="wd-radio" for="userType">User </label>
@@ -52,11 +54,16 @@ const Login = () => {
                 onChange={(event) => onValueChange(event)}></input>
                     <label className="wd-radio" for="userType">Nutritionist  </label>
                     
-                </div>
+            </div>
             <div className="footer">
                 <button type="button" class="btn btn-primary" onClick={login}>Login</button>
             </div>
-        </div>      
+            <div >
+                <span>New User? Register here</span>
+                <button type="button" class="btn btn-primary" onClick={() => navigate("/register")}>Register</button>
+            </div>
+        </div> 
+        </>     
       )
 }
 export default Login;

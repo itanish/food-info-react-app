@@ -20,6 +20,7 @@ import AdminLogin from "./components/Admin/Login";
 import AdminDashboard from "./components/Admin/Dashboard";
 import AllMeal from './components/AllMeal'
 import Meal from './components/Meal'
+import ErrorComponent from "./components/Error";
 
 
 function App() {
@@ -45,9 +46,10 @@ function App() {
               <Route path="meal/:id" element={<Meal />} />
               <Route path="editProfile" element={<EditUserProfile />} />
               <Route path="/searchUsers/:name" element={<SearchUser />} />
-              <Route path="/profile/:uid" element={<DifferentUserProfile />}/>
-              <Route path="/admin/login" element={<AdminLogin />}/>
-              <Route path="/admin" element={<AdminDashboard />}/>
+              <Route path="/profile/:uid" element={<DifferentUserProfile />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/error" element={<ErrorComponent />} />
             </Route>
           </Routes>
         </div>

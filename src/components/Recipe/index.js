@@ -7,8 +7,9 @@ import '../../config.js';
 import './index.css';
 import { saveRecipe } from "../../actions/user_actions.js";
 import { saveUserForRecipe } from "../../service/recipe_service.js";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import NavigationBar from "../NavigationBar";
+import { getLoggedInUserDetails } from "../../service/user_service.js";
 
 const Recipe = () => {
     const users = useSelector(state => state.users);
@@ -30,6 +31,7 @@ const Recipe = () => {
     const params = useParams();
 
     const apiKey = global.config.apiKeys.key1;
+    const navigate = useNavigate();
 
     const saveToUser = (id, recipe) => {
         console.log(users);
@@ -58,13 +60,14 @@ const Recipe = () => {
             }
         }
         else {
-            alert("Please login");
+            navigate("/login")
         }
     }
 
     let similarList = [];
 
     useEffect(() => {
+        const userDetails = getLoggedInUserDetails();
         const fetchData = async () => {
 
             const response = await fetch(
@@ -85,7 +88,7 @@ const Recipe = () => {
 
 
         }
-        fetchData()
+            fetchData()
     }, [])
 
     return(

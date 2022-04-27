@@ -4,9 +4,8 @@ import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
-import { loadState } from "../../service/user_service";
+import { getLoggedInUserDetails } from "../../service/user_service";
 import "./profile.css"
-import Parser from "html-react-parser";
 import { useState } from "react";
 
 const apiKey = global.config.apiKeys.key1;
@@ -41,6 +40,7 @@ const UserProfile = () => {
     const users = useSelector(state => state.users)
     let navigate = useNavigate();
     const [input, setInput] = useState("");
+    const [isUserNutritionist, setUserNutritionist] = useState(false);
 
     const routeChange = () => {
       let path = `searchUsers/${input}`;
@@ -55,31 +55,37 @@ const UserProfile = () => {
       instructions: "",
       extendedIngredients: [],
     }]);
-    
     useEffect(() => {
-      
-        const fetchData = async () => {
-          const userDetails = loadState();
-          if (userDetails !== undefined && userDetails !== null) {
-            dispatch({
-              type: "LOGIN_USER",
-              user: userDetails,
-            });
-          }
-          const recipeList = recipe;
-          userDetails.recipe.map(async (rId) => {  
-            const response = await fetch(`https://api.spoonacular.com/recipes/${rId}/information?apiKey=${apiKey}`);
-            const recipeData = await response.json();
-            // console.log(recipeData);
-            recipeList.push(recipeData);
-            
-          });
-          console.log("list", recipeList);
-          setRecipe(recipeList);  
-          
+      const fetchData = async () => {
+      if (userDetails !== undefined && userDetails !== null) {
+        dispatch({
+          type: "LOGIN_USER",
+          user: userDetails,
+        });
+      }
+      const recipeList = recipe;
+      userDetails.recipe.map(async (rId) => {
+        const response = await fetch(
+          `https://api.spoonacular.com/recipes/${rId}/information?apiKey=${apiKey}`
+        );
+        const recipeData = await response.json();
+        // console.log(recipeData);
+        recipeList.push(recipeData);
+        });
+        console.log("list", recipeList);
+        setRecipe(recipeList);
+      };
+
+      const userDetails = getLoggedInUserDetails();
+      if (userDetails === undefined || userDetails === null) {
+        navigate("/login");
+      } else {
+        if (userDetails.role === "nutritionist") {
+          setUserNutritionist(true);
         }
-        fetchData()
-      }, []);
+        fetchData();
+      }
+    }, []);
 
     
 
@@ -151,9 +157,11 @@ const UserProfile = () => {
         <Link to="/">
           <button type="button">Home</button>
         </Link>
+        {isUserNutritionist ?
         <Link to="/addmeal">
           <button type="button">Add Meal</button>
         </Link>
+        : null}
       </>
     );
 }
