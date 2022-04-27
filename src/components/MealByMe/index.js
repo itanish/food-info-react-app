@@ -15,7 +15,7 @@ const MealByMe = () => {
     useEffect(() => {
         const fetchData = async () => {
 
-            const userID = JSON.parse(localStorage.getItem("loggedInUser"))._id;
+            const userID = JSON.parse(localStorage.getItem("user"))._id;
 
             const response = await fetch(
                 `${serverURL}/api/meals/${userID}`)
