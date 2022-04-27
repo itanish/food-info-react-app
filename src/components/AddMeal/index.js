@@ -22,7 +22,10 @@ const AddMeal = () => {
     }
 
     const recipeOnChangeHandler = (recipe) => {
-        meal.recipe = "[" + recipe + "]";
+        let recipess = "[" + recipe + "]";
+        recipess = JSON.parse(recipess)
+
+        meal.recipe = recipess;
     }
 
     return(

@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeScreen from "./components/HomeScreen";
@@ -19,6 +18,9 @@ import SearchUser from "./components/SearchUsers";
 import DifferentUserProfile from "./components/DifferentUserProfile";
 import AdminLogin from "./components/Admin/Login";
 import AdminDashboard from "./components/Admin/Dashboard";
+import AllMeal from './components/AllMeal'
+import Meal from './components/Meal'
+
 
 function App() {
   const reducer = combineReducers({ users: userReducer });
@@ -39,6 +41,8 @@ function App() {
               <Route path="itemsearch/:query" element={<IngredientSearchResult />} />
               <Route path="ingredient/:id" element={<Ingredient />} />
               <Route path="addmeal" element={<AddMeal />} />
+              <Route path="allMeals" element={<AllMeal />} />
+              <Route path="meal/:id" element={<Meal />} />
               <Route path="editProfile" element={<EditUserProfile />} />
               <Route path="/searchUsers/:name" element={<SearchUser />} />
               <Route path="/profile/:uid" element={<DifferentUserProfile />}/>

@@ -66,7 +66,7 @@ export const addMeal = async (dispatch, meal) => {
 }
 
 export const logoutUser = (dispatch) => {
-    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("user");
     dispatch({
       type: "LOGOUT_USER",
     });
