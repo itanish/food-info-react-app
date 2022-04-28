@@ -5,7 +5,7 @@ import IngredientsSearch from "../IngredientSearch"
 import MealByMe from "../MealByMe"
 import MealsBar from "../MealsBar"
 import { useDispatch } from "react-redux";
-import { loadState } from "../../service/user_service";
+import { getLoggedInUserDetails } from "../../service/user_service";
 import React, { useEffect, useState } from 'react'
 
 const HomeScreen = () => {
@@ -19,7 +19,7 @@ const HomeScreen = () => {
     }
 
     useEffect(() => {
-        const userDetails = loadState();
+        const userDetails = getLoggedInUserDetails();
         // console.log(userDetails);
 
         if (userDetails !== undefined && userDetails !== null) {

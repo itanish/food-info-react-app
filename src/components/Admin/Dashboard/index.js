@@ -4,7 +4,8 @@ import AdminNavigationBar from "../NavigationBar";
 import { getNutriotionistsRequetsToApprove, 
     approveNutritionistRequest, 
     declineNutriotionistRequest,
-    getApprovedNutrionists } from "../../../service/user_service";
+    getApprovedNutrionists, 
+    getLoggedInUserDetails} from "../../../service/user_service";
 import { useState } from "react";
 import { Row, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
@@ -14,13 +15,6 @@ const AdminDashboard = () => {
     const [approve, setApproved] = useState([]);
 
     useEffect(() => {
-        // console.log(localStorage.getItem("user"));
-        if (
-          localStorage.getItem("user") === null ||
-          localStorage.getItem("user") === "fail"
-        ) {
-          navigate("/admin/login");
-        }
         const getRequestsToApprove =async  () => {
             const details = await getNutriotionistsRequetsToApprove();
             // console.log(details);
@@ -32,8 +26,17 @@ const AdminDashboard = () => {
         //   console.log(details);
           setApproved(details);
         };
-        getRequestsToApprove();
-        getApprovedNutritionists();
+        const userDetails = getLoggedInUserDetails();
+        if (userDetails === undefined || userDetails === null) {
+          navigate("/admin/login");
+        } else {
+          if (userDetails.role === "admin") {
+            getRequestsToApprove();
+            getApprovedNutritionists();
+          } else {
+            navigate("/error");
+          }
+        }
     }, []);
 
     const approveRequest = async (uid) => {

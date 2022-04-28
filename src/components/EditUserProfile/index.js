@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { updateUser } from "../../actions/user_actions";
 import NavigationBar from "../NavigationBar";
 import { useEffect } from "react";
-import { loadState } from "../../service/user_service";
+import { getLoggedInUserDetails } from "../../service/user_service";
 
 const EditUserusers = () => {
     const users = useSelector(state => state.users);
@@ -12,13 +12,15 @@ const EditUserusers = () => {
     const naigate = useNavigate();
 
     useEffect(() => {
-      const userDetails = loadState();
+      const userDetails = getLoggedInUserDetails();
       // console.log(userDetails);
       if (userDetails !== undefined && userDetails !== null) {
         dispatch({
           type: "LOGIN_USER",
           user: userDetails,
         });
+      } else {
+          naigate("/login");
       }
     }, []);
 

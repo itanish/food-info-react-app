@@ -99,7 +99,7 @@ export const getMeal = async (nutritionist) => {
     return response.data;
 }
 
-export const loadState = () => {
+export const getLoggedInUserDetails = () => {
   try {
     const userDetails = localStorage.getItem("user");
     return JSON.parse(userDetails);
@@ -107,4 +107,3 @@ export const loadState = () => {
     return undefined;
   }
 }
-
