@@ -4,7 +4,7 @@ import { logoutUser } from "../../actions/user_actions";
 import './bar.css';
 
 const renderLoggedInUserDetails = (userDetails, dispatch) => {
-    // console.log("nav bar", userDetails);
+    console.log("nav bar", userDetails);
     if (userDetails && Object.keys(userDetails).length > 0) {
       return (
         <>

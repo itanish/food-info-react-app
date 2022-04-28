@@ -82,6 +82,12 @@ export const addUserMeal = async (user) => {
     return response.data;
 }
 
+export const addIngredient = async (user) => {
+  const response = await axios.post(`${USER_API}/adduseringredients`, user)
+  return response.data;
+}
+
+
 export const addMeal = async (meal) => {
     
     const response = await axios.post(`${MEAL_API}/addMeal`, meal)

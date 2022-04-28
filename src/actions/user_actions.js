@@ -57,6 +57,13 @@ export const saveMeal = async (dispatch, user) => {
     })
 }
 
+export const saveIngredient = async (dispatch, user) => {
+    const newUserMeal = await service.addIngredient(user);
+    dispatch({
+        type: 'ADD_INGREDIENT',
+        userRecipe: newUserMeal
+    })
+}
 
 export const loginUser = async (dispatch, loginUser) => {
     const loggedInUser = await service.loginUser(loginUser);

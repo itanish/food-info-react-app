@@ -9,3 +9,4 @@ export const saveUserForRecipe = async (recipe) => {
     const response = await axios.post(`${RECIPE_API}/addrecipe`, recipe)
     return response.data;
 }
+
