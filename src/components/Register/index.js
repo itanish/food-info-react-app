@@ -5,8 +5,13 @@ import { useDispatch } from 'react-redux'
 const Register = () => {
     let user = {}
     const dispatch = useDispatch();
+    
     const registerUser = () => {
-        console.log(user)
+        
+        if(user.userType===undefined || user.userType===null) {
+            user.userType = "user";
+        }
+        
         createUser(dispatch,user);
     }
 
@@ -48,12 +53,14 @@ const Register = () => {
                 </div>
                 <div className="userType">
                     <span>How do you want to sign up: </span>
-                    <input type="radio" className="wd-inputRadio" name="userType" value="user" 
+                    <label className="wd-radio" for="userType">
+                    <input type="radio" className="wd-inputRadio" id="userType" name="userType" value="user" checked
               onChange={(event) => onValueChange(event)}></input>
-                    <label className="wd-radio" for="userType">User </label>
-                    <input type="radio" className="wd-inputRadio" name="userType" value="nutritionist"
+                    User </label>
+                    <label className="wd-radio" for="nutriType">
+                    <input type="radio" className="wd-inputRadio" id="nutriType" name="userType" value="nutritionist"
               onChange={(event) => onValueChange(event)}></input>
-                    <label className="wd-radio" for="userType">Nutritionist  </label>
+                    Nutritionist  </label>
                     
                 </div>
             </div>

@@ -10,12 +10,12 @@ const renderLoggedInUserDetails = (userDetails, dispatch) => {
         <>
           <div>
             <Link to="/profile">
-              <span>Hi {userDetails.name}</span>
+              <span className="text-white">Hi {userDetails.name}</span>
             </Link>
           </div>
           <div className="wd-space-between-things">
             <Link to="/">
-              <span onClick={() => logoutUser(dispatch)}>Logout</span>
+              <span className="text-white" onClick={() => logoutUser(dispatch)}>Logout</span>
             </Link>
           </div>
         </>
@@ -24,10 +24,10 @@ const renderLoggedInUserDetails = (userDetails, dispatch) => {
       return (
         <>
           <Link className="nav-link" to="/login">
-            Login
+            <span className="text-white">Login </span>
           </Link>
           <Link className="nav-link" to="/register">
-            Register
+            <span className="text-white">Register</span>
           </Link>
         </>
       );
@@ -41,7 +41,7 @@ const NavigationBar = () => {
       <div>
         <nav class="navbar navbar-light wd-bg_color">
           <Link className="navbar-brand" to="/">
-            Food Recommender
+            <span className="text-white">Food Recommender</span>
           </Link>
           <div className="float-right d-inline-flex">
             {renderLoggedInUserDetails(userDetails, dispatch)}
