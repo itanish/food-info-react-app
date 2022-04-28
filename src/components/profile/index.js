@@ -11,36 +11,14 @@ import { useState } from "react";
 const apiKey = global.config.apiKeys.key1;
 
 
-const renderLikedRecipes = (recipe) => {
-  console.log(recipe);
-  return (
-    <div className={"container-fluid"}>
-      <Row>
-        {recipe.map((recipe, k) => (
-          <Col key={k} className="mt-3">
-            <Card>
-              <Card.Img src={recipe.image} />
-
-              <Card.Body>
-                <Link to={"../../recipe/" + recipe.id}>
-                  <Card.Title>{recipe.title}</Card.Title>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </div>
-  );
-};
-
 const UserProfile = () => {
-    
+
     const dispatch = useDispatch();
     const users = useSelector(state => state.users)
     let navigate = useNavigate();
     const [input, setInput] = useState("");
     const [isUserNutritionist, setUserNutritionist] = useState(false);
+    const serverURL = global.config.serverURL;
 
     const routeChange = () => {
       let path = `searchUsers/${input}`;
@@ -49,47 +27,101 @@ const UserProfile = () => {
 
 
     const [recipe, setRecipe] = useState([{
-      title: "",
-      summary: "",
-      image: "",
-      instructions: "",
-      extendedIngredients: [],
+        recipeId: "",
+        recipeName: "",
     }]);
-    useEffect(() => {
-      const fetchData = async () => {
-      if (userDetails !== undefined && userDetails !== null) {
-        dispatch({
-          type: "LOGIN_USER",
-          user: userDetails,
-        });
-      }
-      const recipeList = recipe;
-      userDetails.recipe.map(async (rId) => {
-        const response = await fetch(
-          `https://api.spoonacular.com/recipes/${rId}/information?apiKey=${apiKey}`
-        );
-        const recipeData = await response.json();
-        // console.log(recipeData);
-        recipeList.push(recipeData);
-        });
-        console.log("list", recipeList);
-        setRecipe(recipeList);
-      };
 
-      const userDetails = getLoggedInUserDetails();
-      if (userDetails === undefined || userDetails === null) {
-        navigate("/login");
-      } else {
-        if (userDetails.role === "nutritionist") {
-          setUserNutritionist(true);
-        }
-        fetchData();
-      }
+    const [meals, setMeals] = useState([{
+        _id: "",
+        name: "",
+    }]);
+
+    const [ingredient, setIngredient] = useState([{
+        ingredientId: "",
+        ingredientName: "",
+    }]);
+
+
+    const userDetails = getLoggedInUserDetails();
+
+    console.log(userDetails)
+    useEffect(() => {
+
+          if (userDetails !== undefined && userDetails !== null) {
+            dispatch({
+              type: "LOGIN_USER",
+              user: userDetails,
+            });
+          }
+
+          let recipeList = [];
+        let mealList = [];
+        let ingredientList = [];
+
+          userDetails.recipe.map(async (rId) => {
+              const response = await fetch(
+                  `${serverURL}/api/recipeserver/${rId}`)
+
+              console.log(`${serverURL}/api/recipeserver/${rId}`)
+
+              const recipeDataServer = await response.json();
+
+              recipeList.push(recipeDataServer[0]);
+
+              console.log(recipeDataServer)
+
+              setRecipe(recipeList);
+
+          });
+
+        userDetails.meals.map(async (rId) => {
+
+            const response = await fetch(
+                `${serverURL}/api/mealData/${rId}`)
+
+            console.log(`${serverURL}/api/mealData/${rId}`)
+
+            const mealDataServer = await response.json();
+
+            console.log("Meal Dataaa")
+
+            console.log(mealDataServer)
+
+            mealList.push(mealDataServer[0]);
+
+            console.log(mealDataServer)
+
+            setMeals(mealList);
+
+        });
+
+        userDetails.ingredients.map(async (rId) => {
+
+            const response = await fetch(
+                `${serverURL}/api/ingredientData/${rId}`)
+
+            console.log(`${serverURL}/api/ingredientData/${rId}`)
+
+            const ingredientDataServer = await response.json();
+
+            console.log("ingredients Dataaa")
+
+            console.log(ingredientDataServer)
+
+            ingredientList.push(ingredientDataServer[0]);
+
+            console.log(ingredientDataServer)
+
+            setIngredient(ingredientList);
+
+        });
+
+
     }, []);
 
-    
 
-    console.log("User Profile:",users);
+
+    // console.log("User Profile:",users);
 
     return (
       <>
@@ -142,8 +174,44 @@ const UserProfile = () => {
                 <div class="row mt-2">
                   <div class="col-md-6">
                     <div class="d-block justify-content-between align-items-center mb-3">
+
                       <h5 class="text-right">Liked Recipes</h5>
-                      {renderLikedRecipes(recipe)}
+                        <ul className="list-group mb-5">
+                            {
+                                recipe.map((recipe, k) => (
+                                    <Link to={"../../recipe/" + recipe.recipeId}>
+                                    <li className="list-group-item"><span className={"color-green"}>{recipe.recipeName}</span></li>
+                                    </Link>
+                                ))
+                            }
+                        </ul>
+
+                        <h5 className="text-right">Liked Meals:</h5>
+                        <ul className="list-group mb-5">
+                            {
+                                meals.map((recipe, k) => (
+                                    <Link to={"../../meal/" + recipe.id}>
+                                        <li className="list-group-item"><span
+                                            className={"color-green"}>{recipe.name}</span>
+                                        </li>
+                                    </Link>
+                                ))
+                            }
+                        </ul>
+
+                        <h5 className="text-right">Liked Ingredients:</h5>
+                        <ul className="list-group mb-5">
+                            {
+                                ingredient.map((recipe, k) => (
+                                    <Link to={"../../itemsearch/" + recipe.ingredientId}>
+                                        <li className="list-group-item"><span
+                                            className={"color-green"}>{recipe.ingredientName}</span>
+                                        </li>
+                                    </Link>
+                                ))
+                            }
+                        </ul>
+
                     </div>
                   </div>
                 </div>
