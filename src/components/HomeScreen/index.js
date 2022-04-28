@@ -17,7 +17,7 @@ const HomeScreen = () => {
         // Some js
         return isNutritionistRole;
     }
-
+    
     useEffect(() => {
         const userDetails = getLoggedInUserDetails();
         // console.log(userDetails);
