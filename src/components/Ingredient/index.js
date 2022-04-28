@@ -1,13 +1,18 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import '../../config.js';
 import './index.css';
 import NavigationBar from "../NavigationBar";
+import { saveIngredient } from "../../actions/user_actions.js";
+import { saveUserForIngredient } from "../../service/ingredient_service.js";
 
 const Ingredient = () => {
 
+    const users = useSelector(state => state.users);
+    const dispatch = useDispatch();
     const [ingredient, setIngredient] = useState({
         name:'', estimatedCost: ''
     });
@@ -17,6 +22,35 @@ const Ingredient = () => {
     const params = useParams();
 
     const apiKey = global.config.apiKeys.key1;
+
+    const saveToUser = (id,name) => {
+        if(localStorage.getItem("user")!==null) {
+            if(users.ingredients===undefined) {
+                users.ingredients = [];
+            }
+    
+            if(!users.ingredients.includes(id)) {
+                users.ingredients.push(id);
+                console.log('saving ingredients',users);
+                saveIngredient(dispatch,users);
+                
+                let ingred = {};
+                ingred.ingredientId = id;
+                ingred.ingredientName = name;
+                ingred.likedByName = JSON.parse(localStorage.getItem("user")).name;
+                
+                console.log("Ingred adding user " +ingred);
+                console.log(ingred);
+                saveUserForIngredient(ingred);
+            }
+            else{
+                console.log('not saving as user already have this meal');
+            }
+        }
+        else {
+            alert("Please login");
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +68,7 @@ const Ingredient = () => {
     return(
         <Container>
             <NavigationBar/>
-            <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name}</h2>
+            <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,ingredient.name)}>Save</button></h2>
 
             <h4> Estimated Cost: {ingredient.estimatedCost.value} {ingredient.estimatedCost.unit}</h4>
             <h2 className={"mt-4 mb-3"}>Nutrition Values:</h2>

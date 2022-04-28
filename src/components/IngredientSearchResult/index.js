@@ -1,10 +1,11 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import Parser from 'html-react-parser';
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"
 import NavigationBar from "../NavigationBar";
+import { loadState } from "../../service/user_service.js";
 
 const IngredientSearchResult = () => {
 
@@ -20,7 +21,8 @@ const IngredientSearchResult = () => {
             console.log(recipeData.results);
             setRecipe(recipeData.results);
         }
-
+        const userDetails = loadState();
+        console.log(userDetails)
         fetchData()
     }, [])
 
@@ -32,9 +34,9 @@ const IngredientSearchResult = () => {
                 <ul className="list-group">
 
                 {recipe.map((recipe, k) => (
-                        <a href={'http://localhost:3000/ingredient/' + recipe.id}>
+                        <Link to={'/ingredient/' + recipe.id}>
                             <li className="list-group-item">{recipe.name}</li>
-                        </a>
+                        </Link>
                 ))}
 
                 </ul>
