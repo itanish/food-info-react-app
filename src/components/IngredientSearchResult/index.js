@@ -1,11 +1,10 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
-import Parser from 'html-react-parser';
 import {useParams, Link} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"
 import NavigationBar from "../NavigationBar";
-import { loadState } from "../../service/user_service.js";
+import { getLoggedInUserDetails } from "../../service/user_service.js";
 
 const IngredientSearchResult = () => {
 
@@ -21,7 +20,7 @@ const IngredientSearchResult = () => {
             console.log(recipeData.results);
             setRecipe(recipeData.results);
         }
-        const userDetails = loadState();
+        const userDetails = getLoggedInUserDetails();
         console.log(userDetails)
         fetchData()
     }, [])

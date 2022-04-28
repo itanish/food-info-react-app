@@ -5,7 +5,8 @@ import { getNutriotionistsRequetsToApprove,
     approveNutritionistRequest, 
     declineNutriotionistRequest,
     getApprovedNutrionists, 
-    getLoggedInUserDetails} from "../../../service/user_service";
+    getLoggedInUserDetails,
+    updateAdminApprovedData} from "../../../service/user_service";
 import { useState } from "react";
 import { Row, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
@@ -13,7 +14,7 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
     const [requests, setRequests] = useState([]);
     const [approve, setApproved] = useState([]);
-
+    const userDetails = getLoggedInUserDetails();
     useEffect(() => {
         const getRequestsToApprove =async  () => {
             const details = await getNutriotionistsRequetsToApprove();
@@ -26,7 +27,7 @@ const AdminDashboard = () => {
         //   console.log(details);
           setApproved(details);
         };
-        const userDetails = getLoggedInUserDetails();
+        // const userDetails = getLoggedInUserDetails();
         if (userDetails === undefined || userDetails === null) {
           navigate("/admin/login");
         } else {
@@ -39,9 +40,13 @@ const AdminDashboard = () => {
         }
     }, []);
 
-    const approveRequest = async (uid) => {
-        const response = await approveNutritionistRequest(uid);
-        if (response !== undefined) {
+    const approveRequest = async (uid, email) => {
+        const response = await approveNutritionistRequest(uid, userDetails.email);
+        const adminresponse = await updateAdminApprovedData(
+          userDetails._id,
+          email
+        );
+        if (response !== undefined && adminresponse !== undefined) {
             const user = requests.filter((r) => r._id === uid);
             setRequests(requests.filter((r) => r._id !== uid));
             // console.log("Approved", user);
@@ -91,7 +96,7 @@ const AdminDashboard = () => {
                   {user.name} ({user.role})
                   <Button
                     variant="success"
-                    onClick={() => approveRequest(user._id)}
+                    onClick={() => approveRequest(user._id, user.email)}
                   >
                     Accept
                   </Button>
