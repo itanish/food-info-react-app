@@ -37,7 +37,9 @@ const Ingredient = () => {
                 let ingred = {};
                 ingred.ingredientId = id;
                 ingred.ingredientName = name;
-                ingred.likedByName = JSON.parse(localStorage.getItem("user")).name;
+                ingred.likedBy= {}
+                ingred.likedBy.userId = JSON.parse(localStorage.getItem("user"))["_id"];
+                ingred.likedBy.userName = JSON.parse(localStorage.getItem("user")).name;
                 
                 console.log("Ingred adding user " +ingred);
                 console.log(ingred);

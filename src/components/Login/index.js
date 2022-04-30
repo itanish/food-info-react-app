@@ -1,7 +1,8 @@
-import { loginUser } from "../../actions/user_actions";
+import { loginUser,logoutUser } from "../../actions/user_actions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
+import { getLoggedInUserDetails } from "../../service/user_service";
 
 const Login = () => {
     let loginDetails  = {}
@@ -21,12 +22,19 @@ const Login = () => {
 
     const login = () => {
         loginUser(dispatch, loginDetails).then(() => {
-            //console.log(localStorage.getItem("user")+" hereeeee");
+            
             if(localStorage.getItem("user")===null) {
                 alert("Invalid Credentials")
             }
             else {
+                const u = getLoggedInUserDetails();
+                if(u.access===false) {
+                    alert("Nutritionist not authorised by admin.")
+                    logoutUser(dispatch);
+                }
+                else {
                 navigate("/");
+                }
             }
         });
     }

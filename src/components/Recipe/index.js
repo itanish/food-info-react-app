@@ -28,7 +28,7 @@ const Recipe = () => {
 
     const [recipeServer, setRecipeServer] = useState({
                                                          recipeId:'',
-                                                         likedByName:[],
+                                                         likedBy:[],
                                          });
 
 
@@ -65,8 +65,9 @@ const Recipe = () => {
                 let recipes = {};
                 recipes.recipeId = id;
                 recipes.recipeName = recipe;
-                recipes.likedByName = JSON.parse(localStorage.getItem("user")).name;
-
+                recipes.likedBy = {}
+                recipes.likedBy.userId = JSON.parse(localStorage.getItem("user"))["_id"];
+                recipes.likedBy.userName = JSON.parse(localStorage.getItem("user")).name;
                 console.log("Recipe adding user " +recipes);
                 console.log(recipes);
                 saveUserForRecipe(recipes);
@@ -105,6 +106,7 @@ const Recipe = () => {
 
             const recipeDataServer = await response3.json();
             setRecipeServer(recipeDataServer[0]);
+            console.log("heenfjfkjdfmk")
             console.log(recipeDataServer)
 
         }
@@ -152,9 +154,13 @@ const Recipe = () => {
                 <Modal.Body>
                     <ul className="list-group mb-5">
                         {
-                            recipeServer.likedByName.map((name, k) => (
-                                <li className="list-group-item"><span className={"color-green"}>{name}</span></li>
+                            
+                            recipeServer.likedBy.map((name, k) => (
+                                <Link to ={`/profile/${name.userId}`}>
+                                <li className="list-group-item"><span className={"color-green"}>{name.userName}</span></li>
+                                </Link>
                             ))
+                            
                         }
                     </ul>
 
