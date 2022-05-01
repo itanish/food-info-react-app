@@ -64,7 +64,7 @@ const Meal = () => {
             <NavigationBar/>
             <h1 className={"heading mt-4 mb-4"}>{recipe.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.name)}>Save</button></h1>
 
-            <img className={"image"} src={"https://source.unsplash.com/random/100×100/?food"}/>
+            <img className={"image-meal"} src={"https://source.unsplash.com/random/100×100/?food"}/>
 
             <h3 className={"mt-4"}>Meal Made By:</h3>
             <p>{recipe.nutritionist_name}</p>

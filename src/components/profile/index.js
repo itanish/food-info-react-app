@@ -173,7 +173,7 @@ const UserProfile = () => {
                 </div>
                 <div className="row mt-2">
                   <div className="col-md-6">
-                    <div className="d-block justify-content-between align-items-center mb-3">
+                    <div className="d-block justify-content-between align-items-center mb-3"
 
                       <h5 className="text-right">Liked Recipes</h5>
                         <ul classNameName="list-group mb-5">
@@ -190,9 +190,9 @@ const UserProfile = () => {
                         <ul classNameName="list-group mb-5">
                             {
                                 meals.map((recipe, k) => (
-                                    <Link to={"../../meal/" + recipe.id}>
-                                        <li classNameName="list-group-item"><span
-                                            classNameName={"color-green"}>{recipe.name}</span>
+                                    <Link to={"../../meal/" + recipe._id}>
+                                        <li className="list-group-item"><span
+                                            className={"color-green"}>{recipe.name}</span>
                                         </li>
                                     </Link>
                                 ))
@@ -203,9 +203,9 @@ const UserProfile = () => {
                         <ul classNameName="list-group mb-5">
                             {
                                 ingredient.map((recipe, k) => (
-                                    <Link to={"../../itemsearch/" + recipe.ingredientId}>
-                                        <li classNameName="list-group-item"><span
-                                            classNameName={"color-green"}>{recipe.ingredientName}</span>
+                                    <Link to={"../../ingredient/" + recipe.ingredientId}>
+                                        <li className="list-group-item"><span
+                                            className={"color-green"}>{recipe.ingredientName}</span>
                                         </li>
                                     </Link>
                                 ))

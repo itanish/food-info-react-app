@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 const Login = () => {
     let loginDetails  = {}
+    loginDetails.userType = "user";
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const emailOnChangeHandler =(email) => {
@@ -65,12 +66,12 @@ const Login = () => {
             </div>
             <div className="userType">
                     <span>How do you want to log in: </span>
-                    <input type="radio" className="wd-inputRadio" name="userType" value="user" 
+                    <input type="radio" className="wd-inputRadio" name="userType" value="user" checked id="userRadio"
                 onChange={(event) => onValueChange(event)}></input>
-                    <label className="wd-radio" for="userType">User </label>
-                    <input type="radio" className="wd-inputRadio" name="userType" value="nutritionist"
+                    <label className="wd-radio" for="userRadio">User </label>
+                    <input type="radio" className="wd-inputRadio" name="userType" value="nutritionist" id="nutriRadio"
                 onChange={(event) => onValueChange(event)}></input>
-                    <label className="wd-radio" for="userType">Nutritionist  </label>
+                    <label className="wd-radio" for="nutriRadio">Nutritionist  </label>
                     
             </div>
             <div className="footer">

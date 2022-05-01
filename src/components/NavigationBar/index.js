@@ -18,7 +18,7 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
               title={`Hi ${userDetails.name}`}
               id="collasible-nav-dropdown"
             >
-              <NavDropdown.Item onClick={() => routeChange(navigate, "/profile")}>
+                <NavDropdown.Item onClick={() => routeChange(navigate, "/profile")}>
                 My Profile
               </NavDropdown.Item>
               <NavDropdown.Divider />
