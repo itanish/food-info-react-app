@@ -16,11 +16,16 @@ export const getUserByEmail = async (dispatch, email) => {
 
 export const loginForAdmin = async (dispatch, adminUser) => {
     const loggedInAdmin = await service.loginAdmin(adminUser);
-    localStorage.setItem("user", JSON.stringify(loggedInAdmin));
-    dispatch({
-      type: "LOGIN_USER",
-      user: loggedInAdmin,
-    });
+    if (loggedInAdmin !== "fail") {
+        localStorage.setItem("user", JSON.stringify(loggedInAdmin));
+        dispatch({
+        type: "LOGIN_USER",
+        user: loggedInAdmin,
+        });
+        return true;
+    } else {
+        return false;
+    }
 };
 
 export const updateUser = async (dispatch, user) => {
@@ -82,7 +87,6 @@ export const loginUser = async (dispatch, loginUser) => {
     }
     
 }
-
 
 export const addMeal = async (dispatch, meal) => {
     const meals = await service.addMeal(meal);

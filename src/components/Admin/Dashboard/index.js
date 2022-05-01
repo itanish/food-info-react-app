@@ -87,20 +87,27 @@ const AdminDashboard = () => {
     return (
       <>
         <AdminNavigationBar />
-        <span>Nutritionists to approve</span>
+        <br />
+        <br />
         <Row>
           <div>
             <ListGroup>
+              <ListGroupItem>
+                <h5>Nutritionists to approve</h5>
+              </ListGroupItem>
               {requests.map((user) => (
                 <ListGroupItem>
                   {user.name} ({user.role})
                   <Button
+                    className="float-end"
                     variant="success"
                     onClick={() => approveRequest(user._id, user.email)}
                   >
                     Accept
                   </Button>
+                  <span>  </span>
                   <Button
+                    className="float-end"
                     variant="danger"
                     onClick={() => declineRequest(user._id)}
                   >
@@ -111,14 +118,19 @@ const AdminDashboard = () => {
             </ListGroup>
           </div>
         </Row>
-        <h3>Nutrionists</h3>
+        <br />
+        <br />
         <Row>
           <div>
             <ListGroup>
+              <ListGroupItem>
+                <h5>Nutrionists currently enrolled</h5>
+              </ListGroupItem>
               {approve.map((user) => (
                 <ListGroupItem>
                   {user.name} ({user.role})
                   <Button
+                    className="float-end"
                     variant="danger"
                     onClick={() => removeApproved(user._id)}
                   >
