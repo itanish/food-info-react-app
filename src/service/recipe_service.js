@@ -18,7 +18,7 @@ export const deleteUserForRecipe = async (recipe,user) => {
     let data = {};
     data.recipe = recipe;
     data.user = user;
-    //const response = await axios.put(`${RECIPE_API}/deleteuserforrecipe`, data)
-    //return response.data;
+    const response = await axios.put(`${RECIPE_API}/deleteuserforrecipe`, data)
+    return response.data;
 }
 
