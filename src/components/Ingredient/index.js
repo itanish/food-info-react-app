@@ -65,6 +65,9 @@ const Ingredient = () => {
                 console.log("Ingred adding user " +ingred);
                 console.log(ingred);
                 saveUserForIngredient(ingred);
+                setUnSaved(false);
+                setSaveText("Unsave");
+    
             }
             else{
                 console.log("Users",users)
@@ -72,6 +75,9 @@ const Ingredient = () => {
                 users.ingredients = users.ingredients.filter(item => item !== id);
                 console.log("Users Updated",users)
                 updateUser(dispatch,users);
+                setUnSaved(true);
+                setSaveText("Save");
+    
             }
         }
         else {
@@ -99,7 +105,7 @@ const Ingredient = () => {
         <Container>
             <NavigationBar/>
             <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name} 
-            <button className="btn btn-light" onClick={() => saveToUser(params.id,ingredient.name)}>{saveText}</button>
+            <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,ingredient.name)}>{saveText}</button>
              {/* <button className="btn btn-light" onClick={() => unSaveToUser(params.id)}>UnSave</button> */}
             </h2>
 

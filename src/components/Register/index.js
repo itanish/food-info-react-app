@@ -21,11 +21,27 @@ const Register = () => {
         navigate("/");
       }
     }, []);
+
+    const validateEmail = (email) => {
+        return email.match(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+      };
+      
   
     
     const registerUser = () => {
 
-        
+
+        if (user.name === undefined || user.password === undefined) {
+            alert("Invalid Username/Password!");
+        }
+
+        if (user.email === undefined || !validateEmail(user.email)) {
+            alert("Invalid Email!");
+
+        }
+
         
         if(user.userType===undefined || user.userType===null) {
             user.userType = "user";
@@ -54,23 +70,30 @@ const Register = () => {
     return(
         <>
         <NavigationBar/>
-        <div className="form">
+
+        <div className="jumbotron jumbotron-fluid jumbo-image-login">
+                <div className="container">
+                    <h1 className="display-4 ht-centered-login">Register</h1>
+                </div>
+            </div>
+
+        <div className="form border rounded">
             <div className="form-body">
                 <div className="username">
                     <label className="form__label" for="firstName">Name </label>
-                    <input className="form__input" type="text" id="firstName" placeholder="Full Name" onChange={(event) => {
+                    <input className="form__input form-control" type="text" id="firstName" placeholder="Full Name" onChange={(event) => {
                     nameOnChangeHandler(event.target.value);
                 }} required/>
                 </div>
                 <div className="email">
                     <label className="form__label" for="email">Email </label>
-                    <input  type="email" id="email" className="form__input" placeholder="Email" onChange={(event) => {
+                    <input  type="email" id="email" className="form__input form-control" placeholder="Email" onChange={(event) => {
                     emailOnChangeHandler(event.target.value);
                 }} required/>
                 </div>
                 <div className="password">
                     <label className="form__label" for="password">Password </label>
-                    <input className="form__input" type="password"  id="password" placeholder="Password" onChange={(event) => {
+                    <input className="form__input form-control" type="password"  id="password" placeholder="Password" onChange={(event) => {
                     passwordOnChangeHandler(event.target.value);
                 }} required/>
                 </div>
@@ -89,7 +112,7 @@ const Register = () => {
             </div>
 
             <div className="footer">
-                <button onClick={() => registerUser()} type="button" class="btn btn-primary">Register</button>
+                <button onClick={() => registerUser()} type="button" class="btn btn-primary form-control">Register</button>
             </div>
         </div>      
         </>

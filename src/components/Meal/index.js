@@ -9,6 +9,7 @@ import NavigationBar from "../NavigationBar";
 import './index.css';
 import { saveMeal,updateUser } from "../../actions/user_actions.js";
 import { useNavigate } from "react-router-dom";
+import { getLoggedInUserDetails } from "../../service/user_service.js";
 
 const Meal = () => {
     const users = useSelector(state => state.users);
@@ -22,6 +23,9 @@ const Meal = () => {
                                          });
     const serverURL = global.config.serverURL;
 
+    const [unSaved, setUnSaved] = useState(true);
+
+    const [saveText, setSaveText] = useState("Save");
 
     const params = useParams();
 
@@ -30,6 +34,21 @@ const Meal = () => {
     const unsaveToUser = (id) => {
         users.meals = users.meals.filter(item => item !== id);
         updateUser(dispatch,users);
+    }
+
+    const checkIfUnsaved = (id) => {
+
+        if(localStorage.getItem("user")===null || !getLoggedInUserDetails().meals.includes(id))  {
+            
+            setUnSaved(true);
+            setSaveText("Save");
+            console.log("HEREEEEEE: ",{saveText})
+        }
+        else{
+            setUnSaved(false);
+            setSaveText("Unsave");
+            console.log("HEREEEEEE in Unsave: ",{saveText})
+        }
     }
 
     const saveToUser = (id,name) => {
@@ -42,17 +61,23 @@ const Meal = () => {
                 users.meals.push(id);
                 console.log('saving',users);
                 saveMeal(dispatch,users);
-                
+                setUnSaved(false);
+                setSaveText("Unsave");
             }
             else{
-                console.log('not saving as user already have this meal');
+                users.meals = users.meals.filter(item => item !== id);
+                updateUser(dispatch,users);
+                setUnSaved(true);
+                setSaveText("Save");
             }
         }
         else {
             navigate("/login");
         }
     }
+
     useEffect(() => {
+        checkIfUnsaved(params.id);
         const fetchData = async () => {
             const response = await fetch(
                 `${serverURL}/api/mealData/${params.id}`)
@@ -60,6 +85,7 @@ const Meal = () => {
             const recipeData = await response.json()
             setRecipe(recipeData[0])
             console.log(recipeData);
+            checkIfUnsaved(params.id);
         }
 
         fetchData()
@@ -68,7 +94,10 @@ const Meal = () => {
     return(
         <div className={"container-fluid"}>
             <NavigationBar/>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.name)}>Save</button><button className="btn btn-light" onClick={() => unsaveToUser(params.id,recipe.name)}>UnSave</button></h1>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.name}
+             <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.name)}>{saveText}</button>
+             {/* <button className="btn btn-light" onClick={() => unsaveToUser(params.id,recipe.name)}>UnSave</button> */}
+             </h1>
 
             <img className={"image-meal"} src={"https://source.unsplash.com/random/100×100/?food"}/>
 
