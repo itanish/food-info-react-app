@@ -39,3 +39,28 @@ body{
 .wd-inputRadio{
     padding-right: 2px;
 }
+
+.ht-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90px;
+    color: white;
+
+}
+
+.ht-centered-sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+
+}
+
+
+.jumbo-image-add-meal {
+    background-image: url(https://source.unsplash.com/5PRQsEGkE10/1800x300);
+    height: 300px;
+    margin-bottom: 50px;
+}

@@ -10,3 +10,8 @@
 .nav.navbar-nav.navbar-right li a {
     color: black;
 }
+
+.logo-text {
+    vertical-align: -webkit-baseline-middle;
+    padding-left: 10px;
+}

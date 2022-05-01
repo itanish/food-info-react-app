@@ -4,6 +4,7 @@ import { logoutUser } from "../../actions/user_actions";
 import './bar.css';
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { getLoggedInUserDetails } from "../../service/user_service";
+import tomato from '../../images/tomato_logo.png';
 
 const routeChange = (naviagte, route) => {
 	naviagte(route);
@@ -20,7 +21,7 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
       return (
         <>
           <div>
-            <NavDropdown
+                  <NavDropdown
               title={`Hi ${userDetails.name}`}
               id="collasible-nav-dropdown"
             >
@@ -37,7 +38,8 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
           </div>
         </>
       );
-    } else {
+    }
+    else {
       return (
         <>
           <Link className="nav-link" to="/login">
@@ -74,7 +76,20 @@ const NavigationBar = () => {
       <>
         <Container>
           <Navbar>
-            <Nav className="ms-auto d-inline-flex">
+              <Navbar.Brand href="/">
+                  <img
+                      src={tomato}
+                      width="40"
+                      height="40"
+                      className="d-inline-block align-top"
+                      alt="React Bootstrap logo"
+                  />
+                  <span className={"logo-text"}>
+                      React Bootstrap
+                  </span>
+              </Navbar.Brand>
+
+              <Nav className="ms-auto d-inline-flex">
               {renderLoggedInUserDetails(userDetails, dispatch, navigate)}
             </Nav>
           </Navbar>
