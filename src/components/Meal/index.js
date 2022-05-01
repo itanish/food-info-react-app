@@ -7,7 +7,7 @@ import '../../config.js';
 import {Link} from 'react-router-dom'
 import NavigationBar from "../NavigationBar";
 import './index.css';
-import { saveMeal } from "../../actions/user_actions.js";
+import { saveMeal,updateUser } from "../../actions/user_actions.js";
 import { useNavigate } from "react-router-dom";
 
 const Meal = () => {
@@ -26,6 +26,12 @@ const Meal = () => {
     const params = useParams();
 
     console.log("Meal Page")
+
+    const unsaveToUser = (id) => {
+        users.meals = users.meals.filter(item => item !== id);
+        updateUser(dispatch,users);
+    }
+
     const saveToUser = (id,name) => {
         if(localStorage.getItem("user")!==null) {
             if(users.meals===undefined) {
@@ -62,7 +68,7 @@ const Meal = () => {
     return(
         <div className={"container-fluid"}>
             <NavigationBar/>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.name)}>Save</button></h1>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,recipe.name)}>Save</button><button className="btn btn-light" onClick={() => unsaveToUser(params.id,recipe.name)}>UnSave</button></h1>
 
             <img className={"image-meal"} src={"https://source.unsplash.com/random/100×100/?food"}/>
 

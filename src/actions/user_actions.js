@@ -26,11 +26,12 @@ export const loginForAdmin = async (dispatch, adminUser) => {
 export const updateUser = async (dispatch, user) => {
     console.log("Updating recipe in user")
     const newUser = await service.updateUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch({
         type: 'UPDATE_USER',
         user: user
     })
-    localStorage.setItem("user", JSON.stringify(user));
+    
     
 }
 
@@ -44,6 +45,7 @@ export const createUser = async (dispatch, user) => {
 
 export const saveRecipe = async (dispatch, user) => {
     const newUserRecipe = await service.addRecipe(user);
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch({
         type: 'ADD_RECIPE',
         userRecipe: newUserRecipe
@@ -52,6 +54,7 @@ export const saveRecipe = async (dispatch, user) => {
 
 export const saveMeal = async (dispatch, user) => {
     const newUserMeal = await service.addUserMeal(user);
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch({
         type: 'ADD_MEAL',
         userRecipe: newUserMeal
@@ -60,6 +63,7 @@ export const saveMeal = async (dispatch, user) => {
 
 export const saveIngredient = async (dispatch, user) => {
     const newUserMeal = await service.addIngredient(user);
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch({
         type: 'ADD_INGREDIENT',
         userRecipe: newUserMeal
