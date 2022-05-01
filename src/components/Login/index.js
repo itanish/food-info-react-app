@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 import { getLoggedInUserDetails } from "../../service/user_service";
+import './style.css';
+
 
 const Login = () => {
     let loginDetails  = {}
@@ -43,35 +45,38 @@ const Login = () => {
     return(
         <>
         <NavigationBar />
-        <div className="form">
-            <div className="form-body">
-                <div className="email">
-                    <label className="form__label" for="email">Email </label>
-                    <input  type="email" id="email" className="form__input" placeholder="Email" onChange={(event) => {emailOnChangeHandler(event.target.value)}}/>
-                </div>
-                <div className="password">
-                    <label className="form__label" for="password">Password </label>
-                    <input className="form__input" type="password"  id="password" placeholder="Password" onChange={(event) => {passwordChangeHandler(event.target.value)}}/>
-                </div>
-            </div>
-            <div className="userType">
-                    <span>How do you want to log in: </span>
-                    <input type="radio" className="wd-inputRadio" name="userType" value="user" checked id="userRadio"
-                onChange={(event) => onValueChange(event)}></input>
-                    <label className="wd-radio" for="userRadio">User </label>
-                    <input type="radio" className="wd-inputRadio" name="userType" value="nutritionist" id="nutriRadio"
-                onChange={(event) => onValueChange(event)}></input>
-                    <label className="wd-radio" for="nutriRadio">Nutritionist  </label>
+        <div className="row">
+            <div className="col">
+                <div className="center">
+                    <div className="card">
+                        
+                            {/* <label className="form-item" for="email">Email </label> */}
+                            <input  type="email" id="email" className="form-control form-item" placeholder="Email" onChange={(event) => {emailOnChangeHandler(event.target.value)}}/>
+                        
+                        
+                            {/* <label className="form-item" for="password">Password </label> */}
+                            <input className=" form-control form-item" type="password"  id="password" placeholder="Password" onChange={(event) => {passwordChangeHandler(event.target.value)}}/>
+                        
+                        <div className="userType">
+                            <span> Log in as? </span>
+                            <input type="radio" className="wd-inputRadio form-check-input" name="userType" value="user" checked id="userRadio"
+                        onChange={(event) => onValueChange(event)}></input>
+                            <label className="wd-radio form-check-label" for="userRadio">User </label>
+                            <input type="radio" className=" wd-inputRadio form-check-input" name="userType" value="nutritionist" id="nutriRadio"
+                        onChange={(event) => onValueChange(event)}></input>
+                            <label className="wd-radio form-check-label" for="nutriRadio">Nutritionist  </label>
+                        </div>
+                        <button type="button" className="form-control  btn btn-primary form-submit mb-2" onClick={login}>Login</button>
+                        <span className="wd-margin">New User? Register here</span>
+                        <button type="button" className="form-control btn btn-primary form-submit" onClick={() => navigate("/register")}>Register</button>
+                    </div>
                     
+                </div> 
             </div>
-            <div className="footer">
-                <button type="button" class="btn btn-primary" onClick={login}>Login</button>
+            <div className="col wd-margin">
+                <img src="https://source.unsplash.com/1Shk_PkNkNw/600x600" alt=""/>
             </div>
-            <div >
-                <span>New User? Register here</span>
-                <button type="button" class="btn btn-primary" onClick={() => navigate("/register")}>Register</button>
-            </div>
-        </div> 
+        </div>
         </>     
       )
 }

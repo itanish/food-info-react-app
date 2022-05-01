@@ -24,6 +24,7 @@ export const loginForAdmin = async (dispatch, adminUser) => {
 };
 
 export const updateUser = async (dispatch, user) => {
+    console.log("Updating recipe in user")
     const newUser = await service.updateUser(user);
     dispatch({
         type: 'UPDATE_USER',
