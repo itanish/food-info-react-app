@@ -26,12 +26,7 @@ const Recipe = () => {
                                          });
 
 
-    const [recipeServer, setRecipeServer] = useState({
-                                                         recipeId:'',
-                                                         likedBy:[],
-                                         });
-
-
+    const [recipeServer, setRecipeServer] = useState([]);
 
 
     const [similarID, setSimilarID] = useState([]);
@@ -71,6 +66,7 @@ const Recipe = () => {
                 console.log("Recipe adding user " +recipes);
                 console.log(recipes);
                 saveUserForRecipe(recipes);
+
             }
             else{
                 console.log('not saving as user already have it');
@@ -82,6 +78,7 @@ const Recipe = () => {
     }
 
     let similarList = [];
+
 
 
     useEffect(() => {
@@ -105,7 +102,15 @@ const Recipe = () => {
                 `${serverURL}/api/recipeserver/${params.id}`)
 
             const recipeDataServer = await response3.json();
-            setRecipeServer(recipeDataServer[0]);
+
+            if (recipeDataServer[0] === undefined) {
+                setRecipeServer([]);
+
+            }
+            else {
+                setRecipeServer(recipeDataServer[0].likedBy);
+
+            }
             console.log("heenfjfkjdfmk")
             console.log(recipeDataServer)
 
@@ -148,19 +153,19 @@ const Recipe = () => {
             </ul>
             
             <Modal show={show} onHide={handleClose}>
+
                 <Modal.Header closeButton>
                     <Modal.Title>Liked By:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+
                     <ul className="list-group mb-5">
                         {
-                            
-                            recipeServer.likedBy.map((name, k) => (
+                            recipeServer.map((name, k) => (
                                 <Link to ={`/profile/${name.userId}`}>
-                                <li className="list-group-item"><span className={"color-green"}>{name.userName}</span></li>
+                                    <li className="list-group-item"><span className={"color-green"}>{name.userName}</span></li>
                                 </Link>
                             ))
-                            
                         }
                     </ul>
 

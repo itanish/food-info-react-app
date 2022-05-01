@@ -32,3 +32,20 @@
 .wd-add-image{
     background-image: -webkit-linear-gradient(forestgreen, darkgreen);
 }
+
+.centered-meals {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+}
+
+.centered-meals-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+}
+

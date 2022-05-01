@@ -21,8 +21,8 @@ const RandomRecipes = () => {
 
 
     return(
-        <Container>
-            <h3>Random Recipes</h3>
+        <>
+            <h3 className={"mt-4 mb-4"}>Random Recipes</h3>
             <Row>
                 {recipe.map((recipe, k) => (
                     <Col key={k} xs={12} md={4} lg={3}>
@@ -40,7 +40,7 @@ const RandomRecipes = () => {
                     </Col>
                 ))}
             </Row>
-        </Container>
+        </>
     )
 }
 export default RandomRecipes;

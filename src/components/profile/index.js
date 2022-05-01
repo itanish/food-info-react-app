@@ -172,7 +172,7 @@ const UserProfile = () => {
                   <h4 class="text-right">Profile Details</h4>
                 </div>
                 <div class="row mt-2">
-                  <div class="col-md-6">
+                  <div class="col">
                     <div class="d-block justify-content-between align-items-center mb-3">
 
                       <h5 class="text-right">Liked Recipes</h5>
