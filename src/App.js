@@ -30,7 +30,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div className="container">
+        <div className="container-fluid">
           <Routes>
             <Route path="/">
               <Route index element={<HomeScreen />} />

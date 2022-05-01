@@ -1,22 +1,45 @@
 import { useSelector, useDispatch } from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { logoutUser } from "../../actions/user_actions";
 import './bar.css';
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 
-const renderLoggedInUserDetails = (userDetails, dispatch) => {
-    console.log("nav bar", userDetails);
+const routeChange = (naviagte, route) => {
+	naviagte(route);
+}
+
+const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
     if (userDetails && Object.keys(userDetails).length > 0) {
       return (
         <>
-          <div>
+          {/* <div>
             <Link to="/profile">
-              <span className="text-white">Hi {userDetails.name}</span>
+              <strong>
+                <span>Hi {userDetails.name}</span>
+              </strong>
             </Link>
           </div>
           <div className="wd-space-between-things">
-            <Link to="/">
-              <span className="text-white" onClick={() => logoutUser(dispatch)}>Logout</span>
-            </Link>
+            <strong>
+              <Link to="/">
+                <span onClick={() => logoutUser(dispatch)}>Logout</span>
+              </Link>
+            </strong>
+          </div> */}
+
+          <div>
+            <NavDropdown
+              title={`Hi ${userDetails.name}`}
+              id="collasible-nav-dropdown"
+            >
+              <NavDropdown.Item onClick={() => routeChange(navigate, "/profile")}>
+                My Profile
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => logoutUser(dispatch)}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
           </div>
         </>
       );
@@ -24,10 +47,14 @@ const renderLoggedInUserDetails = (userDetails, dispatch) => {
       return (
         <>
           <Link className="nav-link" to="/login">
-            <span className="text-white">Login </span>
+            <strong>
+              <span>Login </span>
+            </strong>
           </Link>
           <Link className="nav-link" to="/register">
-            <span className="text-white">Register</span>
+            <strong>
+              <span>Register</span>
+            </strong>
           </Link>
         </>
       );
@@ -37,17 +64,28 @@ const renderLoggedInUserDetails = (userDetails, dispatch) => {
 const NavigationBar = () => {
     const userDetails = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     return (
-      <div>
-        <nav class="navbar navbar-light wd-bg_color">
-          <Link className="navbar-brand" to="/">
-            <span className="text-white">Food Recommender</span>
-          </Link>
-          <div className="float-right d-inline-flex">
-            {renderLoggedInUserDetails(userDetails, dispatch)}
-          </div>
-        </nav>
-      </div>
+      // <div>
+      //   <nav>
+      //     <Link className="navbar-brand" to="/">
+      //       <span>Food Recommender</span>
+      //     </Link>
+      //     <div className="float-end d-inline-flex">
+      //       {renderLoggedInUserDetails(userDetails, dispatch)}
+      //     </div>
+      //   </nav>
+      // </div>
+
+      <>
+        <Container>
+          <Navbar>
+            <Nav className="ms-auto d-inline-flex">
+              {renderLoggedInUserDetails(userDetails, dispatch, navigate)}
+            </Nav>
+          </Navbar>
+        </Container>
+      </>
     );
 }
 
