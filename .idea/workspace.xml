@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e18719f6-c69d-40cc-bada-ccb4b9ac0923" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddMeal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddMeal/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddMeal/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddMeal/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Recipe/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Recipe/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavigationBar/bar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationBar/bar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavigationBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationBar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
