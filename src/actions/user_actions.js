@@ -70,11 +70,12 @@ export const loginUser = async (dispatch, loginUser) => {
     const loggedInUser = await service.loginUser(loginUser);
     if(loggedInUser!=="fail") {
         localStorage.setItem("user", JSON.stringify(loggedInUser));
+        dispatch({
+            type: 'LOGIN_USER',
+            user : loggedInUser
+        })
     }
-    dispatch({
-        type: 'LOGIN_USER',
-        user : loggedInUser
-    })
+    
 }
 
 
