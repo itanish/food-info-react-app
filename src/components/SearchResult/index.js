@@ -19,7 +19,20 @@ const SearchResult = () => {
             const response = await fetch(
                 `https://api.spoonacular.com/recipes/complexSearch?query=${params.query}&number=12&apiKey=${apiKey}`)
             const recipeData = await response.json()
-            setRecipe(recipeData.results);
+
+            console.log(recipeData.results)
+
+            if (recipeData.results.length === 0) {
+                setRecipe([{
+                    image: "",
+                    title: "No Results Found!"
+                }]);
+
+            }
+            else {
+                setRecipe(recipeData.results);
+            }
+
         }
 
         fetchData()
@@ -28,7 +41,7 @@ const SearchResult = () => {
     return(
         <Container>
             <NavigationBar/>
-            <h3 className="mt-3">Search Results</h3>
+            <h3 className="mt-3">Search Results for: "{params.query}"</h3>
             <Row>
                 {recipe.map((recipe, k) => (
                     <Col key={k} xs={12} md={4} lg={3} className="mt-3">

@@ -14,4 +14,6 @@
 .logo-text {
     vertical-align: -webkit-baseline-middle;
     padding-left: 10px;
+    font-size: 30px;
+    font-family: 'Permanent Marker', cursive;
 }

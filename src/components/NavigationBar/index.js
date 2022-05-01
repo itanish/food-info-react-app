@@ -73,10 +73,10 @@ const NavigationBar = () => {
                       width="40"
                       height="40"
                       className="d-inline-block align-top"
-                      alt="React Bootstrap logo"
+                      alt="FoodPedia"
                   />
                   <span className={"logo-text"}>
-                      React Bootstrap
+                      FoodPedia
                   </span>
               </Navbar.Brand>
 

@@ -13,7 +13,7 @@ const LikedMeals = () => {
     
     const [meals, setMeals] = useState([{
         _id: "",
-        name: "",
+        name: "No Meals Added",
     }]);
     const serverURL = global.config.serverURL;
 
