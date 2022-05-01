@@ -9,3 +9,11 @@ export const saveUserForIngredient = async (ingred) => {
     const response = await axios.post(`${INGREDIENT_API}/addingredient`, ingred)
     return response.data;
 }
+
+export const deleteUserForRecipe = async (id,user) => {
+    let data = {};
+    data.ingredient = id;
+    data.user = user;
+    const response = await axios.put(`${INGREDIENT_API}/deleteuseringredient`, data)
+    return response.data;
+}

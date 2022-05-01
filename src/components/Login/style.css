@@ -1,33 +1,50 @@
-body{
-    background: #bdc3c7;  /* fallback for old browsers */
-}
-
-.form{
-    background-color: white;
-    border-radius: 5px;
-    width: 550px;
-    margin: 20px auto;
-    padding: 20px;
-    /* height: 600px; */
-}
-
-.form-body{
-    text-align: left;
-    padding: 20px 10px;
-}
-
-.form-body > *{
-    padding: 5px;
-}
-
-.form__label{
-    width: 40%;
-}
-
-.form_input{
-    width: 60%;
-}
-
-.footer{
+.center {
+    font-family: 'Raleway', sans-serif;
+    margin-top: 10px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 0.8rem;
+  }
+  
+  .card > form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card h1 {
     text-align: center;
-}
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .form-item {
+    font-family: 'Raleway', sans-serif;
+    padding: 5px;
+    margin-bottom: 2rem;
+    height: 50px;
+    width: 20rem;
+    border: 1px solid grey;
+  }
+  
+  .form-submit {
+    font-family: 'Raleway', sans-serif;
+    height: 50px;
+    color: #fff;
+    background-color: #1abc9c;
+    border: none;
+    letter-spacing: 0.2rem;
+    transition: 0.3s opacity ease;
+    cursor: pointer;
+  }
+  
+  .wd-margin {
+      margin-top: 5px;
+  }

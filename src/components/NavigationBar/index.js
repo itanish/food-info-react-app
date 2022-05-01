@@ -3,26 +3,39 @@ import {Link, useNavigate} from "react-router-dom";
 import { logoutUser } from "../../actions/user_actions";
 import './bar.css';
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { getLoggedInUserDetails } from "../../service/user_service";
 import tomato from '../../images/tomato_logo.png';
 
 const routeChange = (naviagte, route) => {
 	naviagte(route);
 }
 
+const logoutUserNavBar = (navigate, dispatch) => {
+  logoutUser(dispatch);
+  navigate("/")
+  window.location.reload();
+}
+
 const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
-    if (userDetails && Object.keys(userDetails).length > 0) {
+    if (userDetails !== null && userDetails !== undefined) {
       return (
         <>
           <div>
-                  <NavDropdown
+            <NavDropdown
               title={`Hi ${userDetails.name}`}
               id="collasible-nav-dropdown"
             >
-                <NavDropdown.Item onClick={() => routeChange(navigate, "/profile")}>
+              <NavDropdown.Item
+                onClick={() => routeChange(navigate, "/profile")}
+              >
                 My Profile
               </NavDropdown.Item>
+              {userDetails.role === "nutritionist" ?
+              <NavDropdown.Item onClick={() => routeChange(navigate, "/addMeal")}>
+                Add a Meal Plan
+              </NavDropdown.Item> : null}
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={() => logoutUser(dispatch)}>
+              <NavDropdown.Item onClick={() => logoutUserNavBar(navigate, dispatch)}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
@@ -49,7 +62,7 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
 }
 
 const NavigationBar = () => {
-    const userDetails = useSelector((state) => state.users);
+    const userDetails = getLoggedInUserDetails();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (

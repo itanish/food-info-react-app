@@ -3,112 +3,203 @@ import { useParams } from 'react-router-dom';
 import './profile.css';
 import { getUserById } from '../../service/user_service';
 import NavigationBar from '../NavigationBar';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const DifferentUserProfile = () => {
-    const params = useParams();
-    const userId = params['uid'];
-    const navigate = useNavigate();
-    const [users, setUserData] = useState();
+	const params = useParams();
+	const userId = params['uid'];
+	const [users, setUserData] = useState();
 
-    useEffect(() => {
-        console.log("inside useeffect")
-        const getDataFromServer = async () => {
-            console.log("Getting data")
-            await getUserById(userId).then((data) => {
-                console.log("found")
-                setUserData(data);
-            })
-        }
-        getDataFromServer();
-    }, []);
+	// const [recipe, setRecipe] = useState([{
+	// 	recipeId: "",
+	// 	recipeName: "",
+	//   },
+	// ]);
+	const [recipe, setRecipe] = useState();
 
-    const [input, setInput] = useState("");
+	// const [ingredient, setIngredient] = useState([{
+	// 	ingredientId: "",
+	// 	ingredientName: "",
+	//   },
+	// ]);
+	const [ingredient, setIngredient] = useState();
+	const serverURL = global.config.serverURL;
+	
+	useEffect(() => {
+		console.log("Ping")
+		let recipeList = [];
+    	let ingredientList = [];
 
-    const routeChange = () => {
-      let path = `profile/${input}`;
-      navigate(path);
-    };
+		const getDataFromServer = async () => {
+			await getUserById(userId).then((data) => {
+				setUserData(data);
+				getData(data[0]);
+			})
+		}
+		
+		const getData = async (user) => {
+			console.log("second", user)
+		  if (user !== null && user !== undefined && user.role === "user") {
+			user.recipe.map(async (rId) => {
+				console.log("for id", rId)
+				const response = await fetch(
+					`${serverURL}/api/recipeserver/${rId}`
+				);
+				const recipeDataServer = await response.json();
+				console.log(recipeDataServer)
+				recipeList.push(recipeDataServer[0]);
+				setRecipe(recipeList);
+			});
 
-    console.log("data", users)
+			user.ingredients.map(async (rId) => {
+			  const response = await fetch(
+				`${serverURL}/api/ingredientData/${rId}`
+			  );
+			  const ingredientDataServer = await response.json();
+			  ingredientList.push(ingredientDataServer[0]);
+			  setIngredient(ingredientList)
+			});
+			console.log(recipeList)
+			console.log(ingredientList);
+		  }
+		};
 
-    let name = "";
-    let email = "";
+		getDataFromServer();
+		console.log(users)
+		// getData(users);
+		console.log("Ending useeffect");
 
-    if (users) {
-        name = users[0].name
-        email = users[0].email
-    }
+	}, []);
 
-    return (
-      <>
-        <NavigationBar />
+	const renderLikedRecipesAndIngredients = () => {
+		console.log(recipe)	
+		if (users[0].role === "user") {
+	  	return (
+		<>
+		  <div className="card">
+			<div className="card-body">
+			  <div className="d-flex flex-column align-items-center text-center">
+				<h4>My Liked Recipes</h4>
+				<div className="mt-3">
+				  <ul className="list-group mb-5">
+					{recipe && recipe.length > 0 &&
+					  recipe.map((recipe, k) => {
+						if (recipe === null || recipe === undefined) {
+						  console.log("No recipe details found");
+						  return <></>;
+						}
+						return (
+						  <Link to={"../../recipe/" + recipe.recipeId}>
+							<li className="list-group-item">
+							  <span className={"color-green"}>
+								{recipe.recipeName}
+							  </span>
+							</li>
+						  </Link>
+						);
+					  })}
+				  </ul>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <br />
+		  <div className="card">
+			<div className="card-body">
+			  <div className="d-flex flex-column align-items-center text-center">
+				<h4>My Liked Ingredients</h4>
+				<div className="mt-3">
+				  <ul className="list-group mb-5">
+					{ingredient && ingredient.length > 0 &&
+					  ingredient.map((recipe, k) => {
+						if (recipe === null || recipe === undefined) {
+						  console.log("No ingredient details found");
+						  return null;
+						}
+						return (
+						  <Link to={"../../ingredient/" + recipe.ingredientId}>
+							<li className="list-group-item">
+							  <span className={"color-green"}>
+								{recipe.ingredientName}
+							  </span>
+							</li>
+						  </Link>
+						);
+					  })}
+				  </ul>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <br />
+		</>
+	  );
+	}
+	};
 
-        {/* This is the start of the search bar */}
-        <div>
-          <div className="row height d-flex justify-content-center align-items-center">
-            <div className="col-md-8 mt-5 mb-5">
-              <div className="search">
-                <i className="fa fa-search"></i>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for fellow users!"
-                  value={input}
-                  onInput={(e) => setInput(e.target.value)}
-                />
+	const renderUserDetails = () => {
+	  if (users[0].role === "user") {
+		return (
+		  <div className="card">
+			<div className="card-body">
+			  <div className="d-flex flex-column align-items-center text-center">
+				<img
+				  src="https://bootdey.com/img/Content/avatar/avatar6.png"
+				  alt="Admin"
+				  className="rounded-circle p-1 bg-primary"
+				  width="110"
+				/>
+				<div className="mt-3">
+				  <h4>{users[0].name}</h4>
+				  <h6>{users[0].role}</h6>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		);
+	  } else if (users[0].role === "nutritionist") {
+		return (
+		  <div className="card">
+			<div className="card-body">
+			  <div className="d-flex flex-column align-items-center text-center">
+				<img
+				  src="https://bootdey.com/img/Content/avatar/avatar6.png"
+				  alt="Admin"
+				  className="rounded-circle p-1 bg-primary"
+				  width="110"
+				/>
+				<div className="mt-3">
+				  <h4>{users[0].name}</h4>
+				  <h6>{users[0].role}</h6>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		);
+	  }
+	};
 
-                <button className="btn btn-primary" onClick={routeChange}>
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* This is the end of the search bar */}
-
-        <div class="container rounded bg-white mt-5 mb-5">
-          <div class="row">
-            <div class="col-md-3 border-right">
-              <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img
-                  alt="Profile"
-                  class="rounded-circle mt-5"
-                  width="150px"
-                  src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                />
-                <span class="font-weight-bold">{name}</span>
-                <span class="text-black-50">{email}</span>
-              </div>
-            </div>
-            <div class=" col-9 col-md-5 border-right">
-              <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4 class="text-right">Profile Details</h4>
-                  <div className='d-block'>
-                    <span class="font-weight-bold">{name}</span>
-                    <span class="text-black-50">{email}</span>
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-md-6"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Link to="/editProfile">
-          <button type="button">Edit Profile</button>
-        </Link>
-        <Link to="/">
-          <button type="button">Home</button>
-        </Link>
-        <Link to="/addmeal">
-          <button type="button">Add Meal</button>
-        </Link>
-      </>
-    );
+	// console.log("data", users);
+	console.log("rendering")
+	return (
+	  <>
+		<NavigationBar />
+		<div className="container">
+		  <div className="main-body">
+			<div className="row">
+			  <div className="col-lg-4">
+				  {users ? renderUserDetails(): null}
+				</div>
+			  <div className="col-lg-6">
+				<div>
+				  {recipe || ingredient ? renderLikedRecipesAndIngredients(): null}
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div> 
+	  </> 
+	);
 }
 
 export default DifferentUserProfile;

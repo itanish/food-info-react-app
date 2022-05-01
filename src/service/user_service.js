@@ -52,6 +52,7 @@ export const getApprovedNutrionists = async () => {
   return response.data;
 };
 
+
 export const updateUser = async (user) => {
     console.log("Update user"+user);
     const response = await axios.put(`${USER_API}/${user._id}`, user)
