@@ -54,6 +54,13 @@ const Login = () => {
     return(
         <>
         <NavigationBar />
+
+        <div className="jumbotron jumbotron-fluid jumbo-image-login">
+                <div className="container">
+                    <h1 className="display-4 ht-centered-login">Login</h1>
+                </div>
+            </div>
+
         <div className="row">
             <div className="col">
                 <div className="center">
@@ -81,9 +88,6 @@ const Login = () => {
                     </div>
                     
                 </div> 
-            </div>
-            <div className="col wd-margin">
-                <img src="https://source.unsplash.com/1Shk_PkNkNw/600x600" alt=""/>
             </div>
         </div>
         </>     

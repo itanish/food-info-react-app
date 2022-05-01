@@ -48,3 +48,26 @@
   .wd-margin {
       margin-top: 5px;
   }
+
+
+  @media only screen and (max-width: 600px) {
+    .hide-mobile {
+      display: none;
+    }
+  }
+  
+  .ht-centered-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: white;
+    padding-top: 30px;
+
+}
+
+.jumbo-image-login {
+  background-image: url(https://source.unsplash.com/1Shk_PkNkNw/1800x300);
+  height: 200px;
+  margin-bottom: 50px;
+}
