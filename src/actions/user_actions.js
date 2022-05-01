@@ -66,6 +66,7 @@ export const saveIngredient = async (dispatch, user) => {
 }
 
 export const loginUser = async (dispatch, loginUser) => {
+    console.log("Login before sending to service : ",loginUser)
     const loggedInUser = await service.loginUser(loginUser);
     if(loggedInUser!=="fail") {
         localStorage.setItem("user", JSON.stringify(loggedInUser));
