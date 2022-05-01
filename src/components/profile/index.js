@@ -255,7 +255,9 @@ const UserProfile = () => {
                   <h4>{users.name}</h4>
                   <h6>{users.role}</h6>
                   <p className="text-secondary mb-1">{users.email}</p>
-                  <button className="btn btn-primary">Edit Profile</button>
+                  <Link to="/editprofile">
+                    <button className="btn btn-primary">Edit Profile</button>
+                  </Link>
                 </div>
               </div>
             </div>
