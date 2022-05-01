@@ -18,7 +18,7 @@ const UserProfile = () => {
     const users = useSelector(state => state.users)
     let navigate = useNavigate();
     const [input, setInput] = useState("");
-    const [isUserNutritionist, setUserNutritionist] = useState(false);
+    // const [isUserNutritionist, setUserNutritionist] = useState(false);
     const serverURL = global.config.serverURL;
 
     const routeChange = () => {
@@ -55,21 +55,22 @@ const UserProfile = () => {
             });
           }
 
-          let recipeList = [];
+        let recipeList = [];
         let mealList = [];
         let ingredientList = [];
+		const getData = async () => {
           if (userDetails.role === "user") {
           userDetails.recipe.map(async (rId) => {
               const response = await fetch(
                   `${serverURL}/api/recipeserver/${rId}`)
 
-              console.log(`${serverURL}/api/recipeserver/${rId}`)
+            //   console.log(`${serverURL}/api/recipeserver/${rId}`)
 
               const recipeDataServer = await response.json();
 
               recipeList.push(recipeDataServer[0]);
 
-              console.log(recipeDataServer)
+            //   console.log(recipeDataServer)
 
               setRecipe(recipeList);
 
@@ -81,17 +82,17 @@ const UserProfile = () => {
             const response = await fetch(
                 `${serverURL}/api/mealData/${rId}`)
 
-            console.log(`${serverURL}/api/mealData/${rId}`)
+            // console.log(`${serverURL}/api/mealData/${rId}`)
 
             const mealDataServer = await response.json();
 
-            console.log("Meal Dataaa")
+            // console.log("Meal Dataaa")
 
-            console.log(mealDataServer)
+            // console.log(mealDataServer)
 
             mealList.push(mealDataServer[0]);
 
-            console.log(mealDataServer)
+            // console.log(mealDataServer)
 
             setMeals(mealList);
 
@@ -102,27 +103,34 @@ const UserProfile = () => {
             const response = await fetch(
                 `${serverURL}/api/ingredientData/${rId}`)
 
-            console.log(`${serverURL}/api/ingredientData/${rId}`)
+            // console.log(`${serverURL}/api/ingredientData/${rId}`)
 
             const ingredientDataServer = await response.json();
 
-            console.log("ingredients Dataaa")
+            // console.log("ingredients Dataaa")
 
-            console.log(ingredientDataServer)
+            // console.log(ingredientDataServer)
 
             ingredientList.push(ingredientDataServer[0]);
 
-            console.log(ingredientDataServer)
+            // console.log(ingredientDataServer)
 
             setIngredient(ingredientList);
 
         });
+		
       }
+	}
 
+	getData();
+	
 
     }, []);
 
     const renderLikedRecipesAndIngredients = () => {
+		console.log("Meals", meals);
+    console.log("REcipe", recipe);
+    console.log("Ingredients", ingredient);
       if (userDetails.role === "user") {
         return (
           <>
@@ -161,15 +169,21 @@ const UserProfile = () => {
                   <div className="mt-3">
                     <ul className="list-group mb-5">
                       {ingredient &&
-                        ingredient.map((recipe, k) => (
-                          <Link to={"../../ingredient/" + recipe.ingredientId}>
-                            <li className="list-group-item">
-                              <span className={"color-green"}>
-                                {recipe.ingredientName}
-                              </span>
-                            </li>
-                          </Link>
-                        ))}
+                        ingredient.map((recipe, k) => {
+							if (recipe === null || recipe === undefined) {
+								console.log("No ingredient details found");
+								return <></>;
+							}
+							return (
+							<Link to={"../../ingredient/" + recipe.ingredientId}>
+								<li className="list-group-item">
+								<span className={"color-green"}>
+									{recipe.ingredientName}
+								</span>
+								</li>
+							</Link>
+                        	);
+						})}
                     </ul>
                   </div>
                 </div>
@@ -192,13 +206,19 @@ const UserProfile = () => {
                 <div className="mt-3">
                   <ul className="list-group mb-5">
                     {meals &&
-                      meals.map((recipe, k) => (
+                      meals.map((recipe, k) => {
+						  if (recipe === null || recipe === undefined) {
+							console.log("No meal details found");
+							return <></>;
+						}
+						return (
                         <Link to={"../../meal/" + recipe._id}>
                           <li className="list-group-item">
                             <span className={"color-green"}>{recipe.name}</span>
                           </li>
                         </Link>
-                      ))}
+                      )
+					  })}
                   </ul>
                 </div>
               </div>
@@ -277,6 +297,26 @@ const UserProfile = () => {
     return (
       <>
         <NavigationBar />
+		<div className="row height d-flex justify-content-center align-items-center">
+            <div className="col-md-8 mt-5 mb-5">
+              <div className="search">
+                <i className="fa fa-search"></i>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search for fellow users!"
+                  value={input}
+                  onInput={(e) => setInput(e.target.value)}
+                />
+
+                <Link to={`/searchUsers/${input}`}>
+                  <button className="btn btn-primary">
+                    Search
+                  </button>
+                </Link>
+				</div>
+			</div>
+		</div>
         <div className="container">
           <div className="main-body">
             <div className="row">

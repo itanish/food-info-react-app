@@ -21,7 +21,7 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
       return (
         <>
           <div>
-                  <NavDropdown
+            <NavDropdown
               title={`Hi ${userDetails.name}`}
               id="collasible-nav-dropdown"
             >
@@ -30,6 +30,10 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
               >
                 My Profile
               </NavDropdown.Item>
+              {userDetails.role === "nutritionist" ?
+              <NavDropdown.Item onClick={() => routeChange(navigate, "/addMeal")}>
+                Add a Meal Plan
+              </NavDropdown.Item> : null}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={() => logoutUserNavBar(navigate, dispatch)}>
                 Logout
