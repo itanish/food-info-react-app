@@ -28,7 +28,6 @@ const Recipe = () => {
 
     const [recipeServer, setRecipeServer] = useState([]);
 
-
     const [similarID, setSimilarID] = useState([]);
 
     const [similar, setSimilar] = useState([]);
@@ -83,6 +82,7 @@ const Recipe = () => {
 
     useEffect(() => {
         const userDetails = getLoggedInUserDetails();
+
         const fetchData = async () => {
 
             const response = await fetch(
@@ -122,15 +122,16 @@ const Recipe = () => {
         <div className={"container-fluid"}>
             <NavigationBar/>
             <h1 className={"heading mt-4 mb-4"}>{recipe.title}
-                <Button className="primary mr-3" onClick={() => saveToUser(params.id,recipe.title)}>Save
+                <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
+                    Save
                 </Button>
-                <Button variant="primary ml-3" onClick={handleShow}>
-                    Liked By
+                <Button variant="btn btn-primary heading-button-right" onClick={handleShow}>
+                    Other users who liked this
                 </Button>
             </h1>
 
 
-            <img className={"image"} src={recipe.image}/>
+            <img className={"image-recipe"} src={recipe.image}/>
 
             <h3 className={"mt-4"}>Summary:</h3>
             <p>{Parser (recipe.summary)}</p>
@@ -155,7 +156,7 @@ const Recipe = () => {
             <Modal show={show} onHide={handleClose}>
 
                 <Modal.Header closeButton>
-                    <Modal.Title>Liked By:</Modal.Title>
+                    <Modal.Title>Other Users Who Liked This:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
