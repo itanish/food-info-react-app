@@ -8,6 +8,7 @@ import './index.css';
 import NavigationBar from "../NavigationBar";
 import { saveIngredient,updateUser } from "../../actions/user_actions.js";
 import { saveUserForIngredient} from "../../service/ingredient_service.js";
+import { getLoggedInUserDetails } from "../../service/user_service.js";
 
 const Ingredient = () => {
 
@@ -19,17 +20,29 @@ const Ingredient = () => {
 
     const [nutrition, setNutrition] = useState([]);
 
+    const [unSaved, setUnSaved] = useState(true);
+
+    const [saveText, setSaveText] = useState("Save");
+
     const params = useParams();
 
     const apiKey = global.config.apiKeys.key1;
 
-    const unSaveToUser = (id) => {
-        console.log("Users",users)
-        console.log("ID to be deleted: ",id)
-        users.ingredients = users.ingredients.filter(item => item !== id);
-        console.log("Users Updated",users)
-        updateUser(dispatch,users);
+    const checkIfUnsaved = (id) => {
+
+        if(localStorage.getItem("user")===null || !getLoggedInUserDetails().ingredients.includes(id))  {
+            
+            setUnSaved(true);
+            setSaveText("Save");
+            console.log("HEREEEEEE: ",{saveText})
+        }
+        else{
+            setUnSaved(false);
+            setSaveText("Unsave");
+            console.log("HEREEEEEE in Unsave: ",{saveText})
+        }
     }
+
 
     const saveToUser = (id,name) => {
         if(localStorage.getItem("user")!==null) {
@@ -54,7 +67,11 @@ const Ingredient = () => {
                 saveUserForIngredient(ingred);
             }
             else{
-                console.log('not saving as user already have this meal');
+                console.log("Users",users)
+                console.log("ID to be deleted: ",id)
+                users.ingredients = users.ingredients.filter(item => item !== id);
+                console.log("Users Updated",users)
+                updateUser(dispatch,users);
             }
         }
         else {
@@ -63,6 +80,7 @@ const Ingredient = () => {
     }
 
     useEffect(() => {
+        checkIfUnsaved(params.id);
         const fetchData = async () => {
 
             const response = await fetch(
@@ -71,6 +89,8 @@ const Ingredient = () => {
             setIngredient(recipeData)
             console.log(recipeData)
             setNutrition(recipeData.nutrition.nutrients);
+
+            
         }
         fetchData()
     }, [])
@@ -78,7 +98,10 @@ const Ingredient = () => {
     return(
         <Container>
             <NavigationBar/>
-            <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name} <button className="btn btn-light" onClick={() => saveToUser(params.id,ingredient.name)}>Save</button> <button className="btn btn-light" onClick={() => unSaveToUser(params.id)}>UnSave</button></h2>
+            <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name} 
+            <button className="btn btn-light" onClick={() => saveToUser(params.id,ingredient.name)}>{saveText}</button>
+             {/* <button className="btn btn-light" onClick={() => unSaveToUser(params.id)}>UnSave</button> */}
+            </h2>
 
             <h4> Estimated Cost: {ingredient.estimatedCost.value} {ingredient.estimatedCost.unit}</h4>
             <h2 className={"mt-4 mb-3"}>Nutrition Values:</h2>

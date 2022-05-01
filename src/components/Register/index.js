@@ -5,6 +5,8 @@ import NavigationBar from '../NavigationBar'
 import { useEffect } from 'react'
 import { getLoggedInUserDetails } from '../../service/user_service'
 import { useNavigate } from 'react-router-dom'
+import React from "react";
+
 
 
 const Register = () => {
@@ -22,6 +24,8 @@ const Register = () => {
   
     
     const registerUser = () => {
+
+        
         
         if(user.userType===undefined || user.userType===null) {
             user.userType = "user";
@@ -56,19 +60,19 @@ const Register = () => {
                     <label className="form__label" for="firstName">Name </label>
                     <input className="form__input" type="text" id="firstName" placeholder="Full Name" onChange={(event) => {
                     nameOnChangeHandler(event.target.value);
-                }}/>
+                }} required/>
                 </div>
                 <div className="email">
                     <label className="form__label" for="email">Email </label>
                     <input  type="email" id="email" className="form__input" placeholder="Email" onChange={(event) => {
                     emailOnChangeHandler(event.target.value);
-                }}/>
+                }} required/>
                 </div>
                 <div className="password">
                     <label className="form__label" for="password">Password </label>
                     <input className="form__input" type="password"  id="password" placeholder="Password" onChange={(event) => {
                     passwordOnChangeHandler(event.target.value);
-                }}/>
+                }} required/>
                 </div>
                 <div className="userType">
                     <span>How do you want to sign up: </span>
@@ -83,6 +87,7 @@ const Register = () => {
                     
                 </div>
             </div>
+
             <div className="footer">
                 <button onClick={() => registerUser()} type="button" class="btn btn-primary">Register</button>
             </div>

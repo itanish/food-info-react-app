@@ -32,6 +32,10 @@ const Recipe = () => {
 
     const [similar, setSimilar] = useState([]);
 
+    const [unSaved, setUnSaved] = useState(true);
+
+    const [saveText, setSaveText] = useState("Save");
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -43,24 +47,41 @@ const Recipe = () => {
     const apiKey = global.config.apiKeys.key1;
     const navigate = useNavigate();
 
+    const checkIfUnsaved = (id) => {
+
+        if(localStorage.getItem("user")===null || !getLoggedInUserDetails().recipe.includes(id))  {
+            setUnSaved(true);
+            setSaveText("Save");
+        }
+        else{
+            setUnSaved(false);
+            setSaveText("Unsave");
+
+        }
+
+    }
+
     
 
     const unSaveToUser = (id) => {
-        
+        let users = getLoggedInUserDetails();
         users.recipe = users.recipe.filter(item => item !== id);
         updateUser(dispatch,users);
         deleteUserForRecipe(id,users);
     }
 
     const saveToUser = (id, recipe) => {
-        console.log(users);
+        
         // TODO local storage use
+        let users = getLoggedInUserDetails();
+        console.log(users);
         if(localStorage.getItem("user")!==null) {
             if(users.recipe===undefined) {
                 users.recipe = [];
             }
 
             if(!users.recipe.includes(id)) {
+                setSaveText("Unsave")
                 console.log('saving');
                 users.recipe.push(id);
                 saveRecipe(dispatch,users);
@@ -77,7 +98,11 @@ const Recipe = () => {
 
             }
             else{
-                console.log('not saving as user already have it');
+
+                setSaveText("Save")
+                users.recipe = users.recipe.filter(item => item !== id);
+                updateUser(dispatch,users);
+                deleteUserForRecipe(id,users);
             }
         }
         else {
@@ -91,6 +116,8 @@ const Recipe = () => {
 
     useEffect(() => {
         const userDetails = getLoggedInUserDetails();
+
+        checkIfUnsaved(params.id);
 
         const fetchData = async () => {
 
@@ -130,15 +157,22 @@ const Recipe = () => {
     return(
         <div className={"container-fluid"}>
             <NavigationBar/>
-            <h1 className={"heading mt-4 mb-4"}>{recipe.title}
-                <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
+            <h1 className={"heading mt-4 mb-4"}>{recipe.title} 
+
+
+                {/* {unSaved ? <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
                     Save
+                </Button>: <Button className="primary mr-3" onClick={() => unSaveToUser(params.id)}>UnSave
+                </Button>} */}
+
+                <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
+                    {saveText}
                 </Button>
-                <Button className="primary mr-3" onClick={() => unSaveToUser(params.id)}>UnSave
-                </Button>
-                <Button variant="primary ml-3" onClick={handleShow}>
+
+
+                {/* <Button variant="primary ml-3" onClick={handleShow}>
                     Liked By
-                </Button>
+                </Button> */}
                 <Button variant="btn btn-primary heading-button-right" onClick={handleShow}>
                     Other users who liked this
                 </Button>
