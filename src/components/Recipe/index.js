@@ -144,8 +144,10 @@ const Recipe = () => {
                 </Button>
             </h1>
 
+            <h4 className={"heading mt-4 mb-4"}>Recipe ID: {params.id}</h4>
 
-            <img className={"image-recipe"} src={recipe.image}/>
+
+                <img className={"image-recipe"} src={recipe.image}/>
 
             <h3 className={"mt-4"}>Summary:</h3>
             <p>{Parser (recipe.summary)}</p>

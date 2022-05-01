@@ -53,49 +53,42 @@ const HomeScreen = () => {
 
     }, []);
 
-    return(
-        <div>
-            <NavigationBar/>
+    return (
+      <div>
+        {/* <nav class="navbar navbar-expand-sm fixed-top navbar-light"> */}
+          <NavigationBar />
+        {/* </nav> */}
 
+        <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image">
+          <h1 className={"centered pt-5"}>
+            <b>FoodPedia</b>
+          </h1>
 
-            <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image">
+          <h3 className="p-3 centered-sub">Welcome to Food Encyclopedia.</h3>
 
-                <h1 className={"centered pt-5"}><b>FoodPedia</b></h1>
-
-                <h3 className="p-3 centered-sub">
-                    Welcome to Food Encyclopedia.
-                </h3>
-
-                <Search/>
-
-            </div>
-
-             <RandomRecipes/>
-            {isNutritionistRoleFunc() ?
-             <MealByMe /> :
-             <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image-meal">
-                 < MealsBar/>
-             </div>
-
-            }
-
-            {(loggedIn && !isNutritionistRoleFunc()) ?
-             <LikedMeals /> :
-             ""
-            }
-
-            <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image-ing">
-                
-                <h1 className="mb-4 mt-2 pt-3 p-3">
-                    Find calories and nutrient data for any food item below!.
-                </h1>
-
-                < IngredientsSearch/>
-
-            </div>
-
+          <Search />
         </div>
-    )
+
+        <RandomRecipes />
+        {isNutritionistRoleFunc() ? (
+          <MealByMe />
+        ) : (
+          <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image-meal">
+            <MealsBar />
+          </div>
+        )}
+
+        {loggedIn && !isNutritionistRoleFunc() ? <LikedMeals /> : ""}
+
+        <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image-ing">
+          <h1 className="mb-4 mt-2 pt-3 p-3">
+            Find calories and nutrient data for any food item below!.
+          </h1>
+
+          <IngredientsSearch />
+        </div>
+      </div>
+    );
 }
 export default HomeScreen;
 
