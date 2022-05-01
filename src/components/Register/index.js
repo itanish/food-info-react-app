@@ -1,6 +1,7 @@
 import './style.css'
 import { createUser } from '../../actions/user_actions'
 import { useDispatch } from 'react-redux'
+import NavigationBar from '../NavigationBar'
 
 const Register = () => {
     let user = {}
@@ -31,6 +32,8 @@ const Register = () => {
         user.password = password;
     }
     return(
+        <>
+        <NavigationBar/>
         <div className="form">
             <div className="form-body">
                 <div className="username">
@@ -68,6 +71,7 @@ const Register = () => {
                 <button onClick={() => registerUser()} type="button" class="btn btn-primary">Register</button>
             </div>
         </div>      
+        </>
       )
 }
 export default Register;
