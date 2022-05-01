@@ -1,6 +1,7 @@
 module.exports = global.config = {
     apiKeys: {
-        key1: "bf819584fb044aa8b49c48f63b3d9bf0",
+
+        key1: "38f8d2db98f84b928928809f05ba5db2",
         alternateKey: "695103bbacda486d88166862e1adcd8e",
         alternateKey2: "fbc9c6e710484a20b75e860caa2f16da",
         swapKey: "05562005ed154fa88c45f8b230590913",

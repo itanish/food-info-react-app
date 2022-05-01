@@ -5,8 +5,8 @@ import Parser from 'html-react-parser';
 import { useParams } from "react-router-dom";
 import '../../config.js';
 import './index.css';
-import { saveRecipe } from "../../actions/user_actions.js";
-import { saveUserForRecipe } from "../../service/recipe_service.js";
+import { saveRecipe, updateUser } from "../../actions/user_actions.js";
+import { saveUserForRecipe,deleteUserForRecipe } from "../../service/recipe_service.js";
 import {Link, useNavigate} from 'react-router-dom'
 import NavigationBar from "../NavigationBar";
 import { getLoggedInUserDetails } from "../../service/user_service.js";
@@ -42,6 +42,15 @@ const Recipe = () => {
 
     const apiKey = global.config.apiKeys.key1;
     const navigate = useNavigate();
+
+    
+
+    const unSaveToUser = (id) => {
+        
+        users.recipe = users.recipe.filter(item => item !== id);
+        updateUser(dispatch,users);
+        deleteUserForRecipe(id,users);
+    }
 
     const saveToUser = (id, recipe) => {
         console.log(users);
@@ -124,6 +133,11 @@ const Recipe = () => {
             <h1 className={"heading mt-4 mb-4"}>{recipe.title}
                 <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
                     Save
+                </Button>
+                <Button className="primary mr-3" onClick={() => unSaveToUser(params.id)}>UnSave
+                </Button>
+                <Button variant="primary ml-3" onClick={handleShow}>
+                    Liked By
                 </Button>
                 <Button variant="btn btn-primary heading-button-right" onClick={handleShow}>
                     Other users who liked this

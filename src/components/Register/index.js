@@ -1,9 +1,11 @@
 import './style.css'
 import { createUser } from '../../actions/user_actions'
 import { useDispatch } from 'react-redux'
+import NavigationBar from '../NavigationBar'
 import { useEffect } from 'react'
 import { getLoggedInUserDetails } from '../../service/user_service'
 import { useNavigate } from 'react-router-dom'
+
 
 const Register = () => {
     let user = {}
@@ -46,6 +48,8 @@ const Register = () => {
 
 
     return(
+        <>
+        <NavigationBar/>
         <div className="form">
             <div className="form-body">
                 <div className="username">
@@ -83,6 +87,7 @@ const Register = () => {
                 <button onClick={() => registerUser()} type="button" class="btn btn-primary">Register</button>
             </div>
         </div>      
+        </>
       )
 }
 export default Register;
