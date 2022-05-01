@@ -41,7 +41,7 @@ const EditUserusers = () => {
     return (
       <>
         <NavigationBar />
-        <div>
+        {/* <div>
             <div className="row mb-2">
                 <div className="col-1">
                     <Link to="/"><span className="text-white"><i class="fa fa-solid fa-window-close"></i></span></Link>
@@ -64,7 +64,92 @@ const EditUserusers = () => {
                 <textarea id="bio" onChange={(event) => {
                     emailOnChangeHandler(event.target.value);
                 }}  className="form-control wd-input text-white bg-transparent" defaultValue={users.email}></textarea>
+            </div> */}
+        <div className="d-flex justify-content-center">
+          <div className="col-lg-8">
+            <div className="card">
+              <div className="card-body">
+                <div className="row mb-3">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Full Name</h6>
+                  </div>
+                  <div className="col-sm-9 text-secondary">
+                    <input
+                      type="text"
+                      className="form-control"
+                      defaultValue={users.name}
+                      onChange={(event) => {
+                        nameOnChangeHandler(event.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Email</h6>
+                  </div>
+                  <div className="col-sm-9 text-secondary">
+                    <input
+                      type="text"
+                      className="form-control"
+                      defaultValue={users.email}
+                      onChange={(event) => {
+                        emailOnChangeHandler(event.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Phone</h6>
+                  </div>
+                  <div className="col-sm-9 text-secondary">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value="(239) 816-9029"
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Mobile</h6>
+                  </div>
+                  <div className="col-sm-9 text-secondary">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value="(320) 380-4539"
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Address</h6>
+                  </div>
+                  <div className="col-sm-9 text-secondary">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value="Bay Area, San Francisco, CA"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-3"></div>
+                  <div className="col-sm-9 text-secondary">
+                    <input
+                      type="button"
+                      className="btn btn-primary px-4"
+                      value="Save Changes"
+                      onClick={() => saveusers()}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
       </>
     );
 };

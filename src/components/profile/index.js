@@ -127,22 +127,22 @@ const UserProfile = () => {
       <>
         <NavigationBar />
 
-        {/* This is the start of the search bar */}
+        {/* This is the start of the search bar
         <div>
-          <div className="row height d-flex justify-content-center align-items-center">
-            <div className="col-md-8 mt-5 mb-5">
-              <div className="search">
-                <i className="fa fa-search"></i>
+          <div classNameName="row height d-flex justify-content-center align-items-center">
+            <div classNameName="col-md-8 mt-5 mb-5">
+              <div classNameName="search">
+                <i classNameName="fa fa-search"></i>
                 <input
                   type="text"
-                  className="form-control"
+                  classNameName="form-control"
                   placeholder="Search for fellow users!"
                   value={input}
                   onInput={(e) => setInput(e.target.value)}
                 />
 
                 <Link to={`/searchUsers/${input}`}>
-                  <button className="btn btn-primary">
+                  <button classNameName="btn btn-primary">
                     Search
                   </button>
                 </Link>
@@ -150,62 +150,62 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-        {/* This is the end of the search bar */}
+        
 
-        <div class="container rounded bg-white mt-5 mb-5">
-          <div class="row">
-            <div class="col-md-3 border-right">
-              <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <div className="container rounded bg-white mt-5 mb-5">
+          <div className="row">
+            <div className="col-md-3 border-right">
+              <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img
                   alt="Profile"
-                  class="rounded-circle mt-5"
+                  className="rounded-circle mt-5"
                   width="150px"
                   src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                 />
-                <span class="font-weight-bold">{users.name}</span>
-                <span class="text-black-50">{users.email}</span>
+                <span className="font-weight-bold">{users.name}</span>
+                <span className="text-black-50">{users.email}</span>
               </div>
             </div>
-            <div class=" col-9 col-md-5 border-right">
-              <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4 class="text-right">Profile Details</h4>
+            <div className=" col-9 col-md-5 border-right">
+              <div className="p-3 py-5">
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h4 className="text-right">Profile Details</h4>
                 </div>
-                <div class="row mt-2">
-                  <div class="col-md-6">
-                    <div class="d-block justify-content-between align-items-center mb-3">
+                <div className="row mt-2">
+                  <div className="col-md-6">
+                    <div className="d-block justify-content-between align-items-center mb-3">
 
-                      <h5 class="text-right">Liked Recipes</h5>
-                        <ul className="list-group mb-5">
+                      <h5 className="text-right">Liked Recipes</h5>
+                        <ul classNameName="list-group mb-5">
                             {
                                 recipe.map((recipe, k) => (
                                     <Link to={"../../recipe/" + recipe.recipeId}>
-                                    <li className="list-group-item"><span className={"color-green"}>{recipe.recipeName}</span></li>
+                                    <li classNameName="list-group-item"><span classNameName={"color-green"}>{recipe.recipeName}</span></li>
                                     </Link>
                                 ))
                             }
                         </ul>
 
-                        <h5 className="text-right">Liked Meals:</h5>
-                        <ul className="list-group mb-5">
+                        <h5 classNameName="text-right">Liked Meals:</h5>
+                        <ul classNameName="list-group mb-5">
                             {
                                 meals.map((recipe, k) => (
                                     <Link to={"../../meal/" + recipe.id}>
-                                        <li className="list-group-item"><span
-                                            className={"color-green"}>{recipe.name}</span>
+                                        <li classNameName="list-group-item"><span
+                                            classNameName={"color-green"}>{recipe.name}</span>
                                         </li>
                                     </Link>
                                 ))
                             }
                         </ul>
 
-                        <h5 className="text-right">Liked Ingredients:</h5>
-                        <ul className="list-group mb-5">
+                        <h5 classNameName="text-right">Liked Ingredients:</h5>
+                        <ul classNameName="list-group mb-5">
                             {
                                 ingredient.map((recipe, k) => (
                                     <Link to={"../../itemsearch/" + recipe.ingredientId}>
-                                        <li className="list-group-item"><span
-                                            className={"color-green"}>{recipe.ingredientName}</span>
+                                        <li classNameName="list-group-item"><span
+                                            classNameName={"color-green"}>{recipe.ingredientName}</span>
                                         </li>
                                     </Link>
                                 ))
@@ -229,7 +229,104 @@ const UserProfile = () => {
         <Link to="/addmeal">
           <button type="button">Add Meal</button>
         </Link>
-        : null}
+        : null} */}
+
+        <div className="container">
+          <div className="main-body">
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="d-flex flex-column align-items-center text-center">
+                      <img
+                        src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                        alt="Admin"
+                        className="rounded-circle p-1 bg-primary"
+                        width="110"
+                      />
+                      <div className="mt-3">
+                        <h4>{users.name}</h4>
+                        <p className="text-secondary mb-1">{users.email}</p>
+                        <button className="btn btn-primary">
+                          Edit Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div>
+                  <br />
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="d-flex flex-column align-items-center text-center">
+                        <h4>My Liked Recipes</h4>
+                        <div className="mt-3">
+                          <ul className="list-group mb-5">
+                            {recipe.map((recipe, k) => (
+                              <Link to={"../../recipe/" + recipe.recipeId}>
+                                <li className="list-group-item">
+                                  <span className={"color-green"}>
+                                    {recipe.recipeName}
+                                  </span>
+                                </li>
+                              </Link>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="d-flex flex-column align-items-center text-center">
+                        <h4>My Meal Plans</h4>
+                        <div className="mt-3">
+                          <ul className="list-group mb-5">
+                            {meals.map((recipe, k) => (
+                              <Link to={"../../meal/" + recipe.id}>
+                                <li className="list-group-item">
+                                  <span className={"color-green"}>
+                                    {recipe.name}
+                                  </span>
+                                </li>
+                              </Link>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="d-flex flex-column align-items-center text-center">
+                        <h4>My Liked Recipes</h4>
+                        <div className="mt-3">
+                          <ul className="list-group mb-5">
+                            {ingredient.map((recipe, k) => (
+                              <Link
+                                to={"../../itemsearch/" + recipe.ingredientId}
+                              >
+                                <li className="list-group-item">
+                                  <span className={"color-green"}>
+                                    {recipe.ingredientName}
+                                  </span>
+                                </li>
+                              </Link>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </>
     );
 }

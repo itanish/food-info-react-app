@@ -3,30 +3,16 @@ import {Link, useNavigate} from "react-router-dom";
 import { logoutUser } from "../../actions/user_actions";
 import './bar.css';
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { getLoggedInUserDetails } from "../../service/user_service";
 
 const routeChange = (naviagte, route) => {
 	naviagte(route);
 }
 
 const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
-    if (userDetails && Object.keys(userDetails).length > 0) {
+    if (userDetails !== null && userDetails !== undefined) {
       return (
         <>
-          {/* <div>
-            <Link to="/profile">
-              <strong>
-                <span>Hi {userDetails.name}</span>
-              </strong>
-            </Link>
-          </div>
-          <div className="wd-space-between-things">
-            <strong>
-              <Link to="/">
-                <span onClick={() => logoutUser(dispatch)}>Logout</span>
-              </Link>
-            </strong>
-          </div> */}
-
           <div>
             <NavDropdown
               title={`Hi ${userDetails.name}`}
@@ -62,7 +48,7 @@ const renderLoggedInUserDetails = (userDetails, dispatch, navigate) => {
 }
 
 const NavigationBar = () => {
-    const userDetails = useSelector((state) => state.users);
+    const userDetails = getLoggedInUserDetails();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (
