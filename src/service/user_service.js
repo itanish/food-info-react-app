@@ -30,8 +30,13 @@ export const getNutriotionistsRequetsToApprove = async () => {
 	return response.data;
 }
 
-export const approveNutritionistRequest = async (uid) => {
-  const response = await axios.put(`${NUTRITIONIST_API}/reqeusts/approve/${uid}`);
+export const approveNutritionistRequest = async (uid, adminEmail) => {
+  const response = await axios.put(`${NUTRITIONIST_API}/reqeusts/approve/${uid}/${adminEmail}`);
+  return response.data;
+};
+
+export const updateAdminApprovedData = async (adminId, nutriEmail) => {
+  const response = await axios.put(`${ADMIN_API}/reqeusts/approve/${adminId}/${nutriEmail}`);
   return response.data;
 };
 

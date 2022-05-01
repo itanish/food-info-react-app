@@ -1,6 +1,5 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
-import Parser from 'html-react-parser';
 import {useParams, Link} from "react-router-dom";
 import "../../config.js"
 import "./searchresult.css"

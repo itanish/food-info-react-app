@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 import { getLoggedInUserDetails } from "../../service/user_service";
 import './style.css';
+import { useEffect } from "react";
 
 
 const Login = () => {
@@ -42,6 +43,14 @@ const Login = () => {
         });
     }
 
+    useEffect(() => {
+        const details = getLoggedInUserDetails();
+        console.log(details);
+        if (details !== null && details !== undefined) {
+            navigate("/");
+        }
+    }, []);
+    
     return(
         <>
         <NavigationBar />

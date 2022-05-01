@@ -6,3 +6,7 @@
 .wd-bg_color {
     background-color: forestgreen;
 }
+
+.nav.navbar-nav.navbar-right li a {
+    color: black;
+}

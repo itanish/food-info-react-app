@@ -26,13 +26,7 @@ const Recipe = () => {
                                          });
 
 
-    const [recipeServer, setRecipeServer] = useState({
-                                                         recipeId:'',
-                                                         likedBy:[],
-                                         });
-
-
-
+    const [recipeServer, setRecipeServer] = useState([]);
 
     const [similarID, setSimilarID] = useState([]);
 
@@ -80,6 +74,7 @@ const Recipe = () => {
                 console.log("Recipe adding user " +recipes);
                 console.log(recipes);
                 saveUserForRecipe(recipes);
+
             }
             else{
                 console.log('not saving as user already have it');
@@ -93,8 +88,10 @@ const Recipe = () => {
     let similarList = [];
 
 
+
     useEffect(() => {
         const userDetails = getLoggedInUserDetails();
+
         const fetchData = async () => {
 
             const response = await fetch(
@@ -114,7 +111,15 @@ const Recipe = () => {
                 `${serverURL}/api/recipeserver/${params.id}`)
 
             const recipeDataServer = await response3.json();
-            setRecipeServer(recipeDataServer[0]);
+
+            if (recipeDataServer[0] === undefined) {
+                setRecipeServer([]);
+
+            }
+            else {
+                setRecipeServer(recipeDataServer[0].likedBy);
+
+            }
             console.log("heenfjfkjdfmk")
             console.log(recipeDataServer)
 
@@ -126,17 +131,21 @@ const Recipe = () => {
         <div className={"container-fluid"}>
             <NavigationBar/>
             <h1 className={"heading mt-4 mb-4"}>{recipe.title}
-                <Button className="primary mr-3" onClick={() => saveToUser(params.id,recipe.title)}>Save
+                <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
+                    Save
                 </Button>
                 <Button className="primary mr-3" onClick={() => unSaveToUser(params.id)}>UnSave
                 </Button>
                 <Button variant="primary ml-3" onClick={handleShow}>
                     Liked By
                 </Button>
+                <Button variant="btn btn-primary heading-button-right" onClick={handleShow}>
+                    Other users who liked this
+                </Button>
             </h1>
 
 
-            <img className={"image"} src={recipe.image}/>
+            <img className={"image-recipe"} src={recipe.image}/>
 
             <h3 className={"mt-4"}>Summary:</h3>
             <p>{Parser (recipe.summary)}</p>
@@ -159,19 +168,19 @@ const Recipe = () => {
             </ul>
             
             <Modal show={show} onHide={handleClose}>
+
                 <Modal.Header closeButton>
-                    <Modal.Title>Liked By:</Modal.Title>
+                    <Modal.Title>Other Users Who Liked This:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+
                     <ul className="list-group mb-5">
                         {
-                            
-                            recipeServer.likedBy.map((name, k) => (
+                            recipeServer.map((name, k) => (
                                 <Link to ={`/profile/${name.userId}`}>
-                                <li className="list-group-item"><span className={"color-green"}>{name.userName}</span></li>
+                                    <li className="list-group-item"><span className={"color-green"}>{name.userName}</span></li>
                                 </Link>
                             ))
-                            
                         }
                     </ul>
 

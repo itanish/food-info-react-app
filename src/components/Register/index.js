@@ -2,10 +2,24 @@ import './style.css'
 import { createUser } from '../../actions/user_actions'
 import { useDispatch } from 'react-redux'
 import NavigationBar from '../NavigationBar'
+import { useEffect } from 'react'
+import { getLoggedInUserDetails } from '../../service/user_service'
+import { useNavigate } from 'react-router-dom'
+
 
 const Register = () => {
     let user = {}
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      const details = getLoggedInUserDetails();
+      console.log(details);
+      if (details !== null && details !== undefined) {
+        navigate("/");
+      }
+    }, []);
+  
     
     const registerUser = () => {
         
@@ -31,6 +45,8 @@ const Register = () => {
     const passwordOnChangeHandler = (password) => {
         user.password = password;
     }
+
+
     return(
         <>
         <NavigationBar/>

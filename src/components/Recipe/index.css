@@ -2,9 +2,17 @@
     color: forestgreen;
 }
 
-.image {
+.image-recipe {
     border: 5px solid forestgreen;
 }
+
+@media only screen and (max-width: 600px) {
+    .image-recipe {
+        border: 5px solid forestgreen;
+        width: 100% !important;
+    }
+}
+
 
 .savelink {
     font-size: 27px;
@@ -13,4 +21,15 @@
 
 .color-green {
     color: forestgreen;
+}
+
+.heading-button-left{
+    margin-left: 10px;
+    background-color: forestgreen !important;
+}
+
+.heading-button-right {
+    margin-left: 10px;
+    background-color: forestgreen !important;
+
 }
