@@ -190,7 +190,7 @@ const UserProfile = () => {
                         <ul className="list-group mb-5">
                             {
                                 meals.map((recipe, k) => (
-                                    <Link to={"../../meal/" + recipe.id}>
+                                    <Link to={"../../meal/" + recipe._id}>
                                         <li className="list-group-item"><span
                                             className={"color-green"}>{recipe.name}</span>
                                         </li>
@@ -203,7 +203,7 @@ const UserProfile = () => {
                         <ul className="list-group mb-5">
                             {
                                 ingredient.map((recipe, k) => (
-                                    <Link to={"../../itemsearch/" + recipe.ingredientId}>
+                                    <Link to={"../../ingredient/" + recipe.ingredientId}>
                                         <li className="list-group-item"><span
                                             className={"color-green"}>{recipe.ingredientName}</span>
                                         </li>
