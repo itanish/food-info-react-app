@@ -151,7 +151,7 @@ const DifferentUserProfile = () => {
 				/>
 				<div className="mt-3">
 				  <h4>{users[0].name}</h4>
-				  <h6>{users[0].role}</h6>
+				  <h6>Role : {users[0].role.toUpperCase()}</h6>
 				</div>
 			  </div>
 			</div>
@@ -170,7 +170,7 @@ const DifferentUserProfile = () => {
 				/>
 				<div className="mt-3">
 				  <h4>{users[0].name}</h4>
-				  <h6>{users[0].role}</h6>
+				  <h6>Role : {users[0].role.toUpperCase()}</h6>
 				</div>
 			  </div>
 			</div>

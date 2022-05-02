@@ -99,7 +99,7 @@ const EditUserusers = () => {
                     />
                   </div>
                 </div>
-                <div className="row mb-3">
+                {/* <div className="row mb-3">
                   <div className="col-sm-3">
                     <h6 className="mb-0">Phone</h6>
                   </div>
@@ -134,7 +134,7 @@ const EditUserusers = () => {
                       value="Bay Area, San Francisco, CA"
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-sm-3"></div>
                   <div className="col-sm-9 text-secondary">

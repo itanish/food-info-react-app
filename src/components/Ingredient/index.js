@@ -65,16 +65,27 @@ const Ingredient = () => {
     }
 
     const saveToUser = (id,name) => {
+
+        let users = getLoggedInUserDetails();
+
         if(localStorage.getItem("user")!==null) {
             if(users.ingredients===undefined) {
                 users.ingredients = [];
             }
     
             if(!users.ingredients.includes(id)) {
+
+                let users = getLoggedInUserDetails();
+
                 users.ingredients.push(id);
                 console.log('saving ingredients',users);
                 saveIngredient(dispatch,users);
-                
+
+                console.log(users);
+                console.log("New User")
+                console.log(users);
+                console.log(localStorage.getItem("users"));
+
                 let ingred = {};
                 ingred.ingredientId = id;
                 ingred.ingredientName = name;
@@ -125,7 +136,6 @@ const Ingredient = () => {
         <Container>
             <NavigationBar/>
             <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name} 
-            
             {
                 !checkIfNutritionist()?
                 <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,ingredient.name)}>{saveText}</button>
