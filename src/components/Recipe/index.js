@@ -49,14 +49,21 @@ const Recipe = () => {
 
     const checkIfUnsaved = (id) => {
 
-        if(localStorage.getItem("user")===null || !getLoggedInUserDetails().recipe.includes(id))  {
-            setUnSaved(true);
-            setSaveText("Save");
-        }
-        else{
-            setUnSaved(false);
-            setSaveText("Unsave");
-
+        if (getLoggedInUserDetails() !== null && getLoggedInUserDetails() !== undefined) {
+            if (getLoggedInUserDetails().role !== "nutritionist") {
+                if(localStorage.getItem("user")===null || !getLoggedInUserDetails().recipe.includes(id))  {
+                    setUnSaved(true);
+                    setSaveText("Save");
+                }
+                else{
+                    setUnSaved(false);
+                    setSaveText("Unsave");
+        
+                }
+        
+            }
+    
+    
         }
 
     }
@@ -64,11 +71,36 @@ const Recipe = () => {
     
 
     const unSaveToUser = (id) => {
-        let users = getLoggedInUserDetails();
-        users.recipe = users.recipe.filter(item => item !== id);
-        updateUser(dispatch,users);
-        deleteUserForRecipe(id,users);
+
+        if (getLoggedInUserDetails() !== null && getLoggedInUserDetails() !== undefined) {
+
+        if (getLoggedInUserDetails().role !== "nutritionist") {
+            let users = getLoggedInUserDetails();
+            users.recipe = users.recipe.filter(item => item !== id);
+            updateUser(dispatch,users);
+            deleteUserForRecipe(id,users);
+    
+        }
+
     }
+
+    }
+
+    const checkIfNutritionist = () => {
+        
+        console.log("out here")
+
+        if (localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined) {
+            if (JSON.parse(localStorage.getItem("user")).role === "nutritionist") {
+                console.log("In here")
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
     const saveToUser = (id, recipe) => {
         
@@ -165,10 +197,14 @@ const Recipe = () => {
                 </Button>: <Button className="primary mr-3" onClick={() => unSaveToUser(params.id)}>UnSave
                 </Button>} */}
 
+                {
+                !checkIfNutritionist()?
                 <Button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.title)}>
                     {saveText}
                 </Button>
 
+                :""
+                }
 
                 {/* <Button variant="primary ml-3" onClick={handleShow}>
                     Liked By

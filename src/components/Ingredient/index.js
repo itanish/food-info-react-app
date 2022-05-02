@@ -30,6 +30,11 @@ const Ingredient = () => {
 
     const checkIfUnsaved = (id) => {
 
+
+        if (getLoggedInUserDetails() !== null && getLoggedInUserDetails() !== undefined) {
+
+            if (getLoggedInUserDetails().role !== "nutritionist") {
+
         if(localStorage.getItem("user")===null || !getLoggedInUserDetails().ingredients.includes(id))  {
             
             setUnSaved(true);
@@ -42,7 +47,22 @@ const Ingredient = () => {
             console.log("HEREEEEEE in Unsave: ",{saveText})
         }
     }
+    }
+    }
 
+    const checkIfNutritionist = () => {
+        
+        console.log("out here")
+
+        if (getLoggedInUserDetails !== null && getLoggedInUserDetails !== undefined) {
+            if (getLoggedInUserDetails.role === "nutritionist") {
+                console.log("In here")
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     const saveToUser = (id,name) => {
         if(localStorage.getItem("user")!==null) {
@@ -105,8 +125,12 @@ const Ingredient = () => {
         <Container>
             <NavigationBar/>
             <h2 className={"mt-4 mb-3 heading"}>Food Item: {ingredient.name} 
-            <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,ingredient.name)}>{saveText}</button>
-             {/* <button className="btn btn-light" onClick={() => unSaveToUser(params.id)}>UnSave</button> */}
+            
+            {
+                !checkIfNutritionist()?
+                <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,ingredient.name)}>{saveText}</button>
+                :""
+            }
             </h2>
 
             <h4> Estimated Cost: {ingredient.estimatedCost.value} {ingredient.estimatedCost.unit}</h4>

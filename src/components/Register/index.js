@@ -34,12 +34,13 @@ const Register = () => {
 
 
         if (user.name === undefined || user.password === undefined) {
-            alert("Invalid Username/Password!");
+            alert("Invalid Data!");
+            return;
         }
 
         if (user.email === undefined || !validateEmail(user.email)) {
             alert("Invalid Email!");
-
+            return;
         }
 
         
@@ -48,6 +49,9 @@ const Register = () => {
         }
         
         createUser(dispatch,user);
+
+        navigate("/login");
+
     }
 
     const onValueChange = (event) => {
