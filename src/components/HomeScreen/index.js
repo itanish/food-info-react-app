@@ -5,6 +5,7 @@ import IngredientsSearch from "../IngredientSearch"
 import MealByMe from "../MealByMe"
 import MealsBar from "../MealsBar"
 import LikedMeals from "../LikedMeals"
+import RecentMeals from "../RecentMeals";
 import "./index.css"
 import { useDispatch } from "react-redux";
 import { getLoggedInUserDetails } from "../../service/user_service";
@@ -80,11 +81,12 @@ const HomeScreen = () => {
 
         {loggedIn && !isNutritionistRoleFunc() ? <LikedMeals /> : ""}
 
+        <RecentMeals/>
+
         <div className="jumbotron jumbotron-fluid text-white jumbotron-image shadow jumbo-image-ing">
           <h1 className="mb-4 mt-2 pt-3 p-3">
             Find calories and nutrient data for any food item below!.
           </h1>
-
           <IngredientsSearch />
         </div>
       </div>

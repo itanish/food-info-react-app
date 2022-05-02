@@ -121,7 +121,7 @@ const AdminNavigationBar = () => {
       <>
         <Container>
           <Navbar>
-              <Navbar.Brand href="/">
+              <Navbar.Brand>
                   <img
                       src={tomato}
                       width="40"

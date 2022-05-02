@@ -32,24 +32,51 @@ const Meal = () => {
     console.log("Meal Page")
 
     const unsaveToUser = (id) => {
-        users.meals = users.meals.filter(item => item !== id);
-        updateUser(dispatch,users);
+
+        if (getLoggedInUserDetails() !== null && getLoggedInUserDetails() !== undefined) {
+
+        if (getLoggedInUserDetails().role !== "nutritionist") {
+            users.meals = users.meals.filter(item => item !== id);
+            updateUser(dispatch,users);
+        }
+    }
     }
 
     const checkIfUnsaved = (id) => {
 
-        if(localStorage.getItem("user")===null || !getLoggedInUserDetails().meals.includes(id))  {
-            
-            setUnSaved(true);
-            setSaveText("Save");
-            console.log("HEREEEEEE: ",{saveText})
-        }
-        else{
-            setUnSaved(false);
-            setSaveText("Unsave");
-            console.log("HEREEEEEE in Unsave: ",{saveText})
-        }
+        if (getLoggedInUserDetails() !== null && getLoggedInUserDetails() !== undefined) {
+
+        if (getLoggedInUserDetails().role !== "nutritionist") {
+
+            if(localStorage.getItem("user")===null || !getLoggedInUserDetails().meals.includes(id))  {
+                
+                setUnSaved(true);
+                setSaveText("Save");
+                console.log("HEREEEEEE: ",{saveText})
+            }
+            else{
+                setUnSaved(false);
+                setSaveText("Unsave");
+                console.log("HEREEEEEE in Unsave: ",{saveText})
+            }
     }
+    }
+    }
+
+    const checkIfNutritionist = () => {
+        
+        console.log("out here")
+
+        if (getLoggedInUserDetails !== null && getLoggedInUserDetails !== undefined) {
+            if (getLoggedInUserDetails.role === "nutritionist") {
+                console.log("In here")
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     const saveToUser = (id,name) => {
         if(localStorage.getItem("user")!==null) {
@@ -92,10 +119,19 @@ const Meal = () => {
     }, [])
 
     return(
+
+        <>
+
+        <NavigationBar/>
+
         <div className={"container-fluid"}>
-            <NavigationBar/>
             <h1 className={"heading mt-4 mb-4"}>{recipe.name}
-             <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.name)}>{saveText}</button>
+
+            {
+                !checkIfNutritionist()?
+                <button className="btn btn-primary heading-button-left" onClick={() => saveToUser(params.id,recipe.name)}>{saveText}</button>
+                :""
+            }
              {/* <button className="btn btn-light" onClick={() => unsaveToUser(params.id,recipe.name)}>UnSave</button> */}
              </h1>
 
@@ -113,6 +149,8 @@ const Meal = () => {
                 ))
             }
         </div>
+
+        </>
     )
 }
 export default Meal;
