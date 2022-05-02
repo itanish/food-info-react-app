@@ -252,9 +252,9 @@ const UserProfile = () => {
                   width="110"
                 />
                 <div className="mt-3">
-                  <h4>{users.name}</h4>
-                  <h6>Role : {users.role.toUpperCase()}</h6>
-                  <p className="text-secondary mb-1">Email : {users.email}</p>
+                  <h4>{userDetails.name}</h4>
+                  <h6>Role : {userDetails.role.toUpperCase()}</h6>
+                  <p className="text-secondary mb-1">Email : {userDetails.email}</p>
                   <Link to="/editprofile">
                     <button className="btn btn-primary">Edit Profile</button>
                   </Link>
@@ -275,9 +275,9 @@ const UserProfile = () => {
                   width="110"
                 />
                 <div className="mt-3">
-                  <h4>{users.name}</h4>
-                  <h6>Role : {users.role.toUpperCase()}</h6>
-                  <p className="text-secondary mb-1">Email : {users.email}</p>
+                  <h4>{userDetails.name}</h4>
+                  <h6>Role : {userDetails.role.toUpperCase()}</h6>
+                  <p className="text-secondary mb-1">Email : {userDetails.email}</p>
                   <Link to="/editprofile">
                     <button className="btn btn-primary">Edit Profile</button>
                   </Link>
