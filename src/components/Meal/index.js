@@ -48,16 +48,22 @@ const Meal = () => {
 
         if (getLoggedInUserDetails().role !== "nutritionist") {
 
-            if(localStorage.getItem("user")===null || !getLoggedInUserDetails().meals.includes(id))  {
+            if (!getLoggedInUserDetails().meals === undefined) {
+
+                localStorage.getItem("user").meals = []
+
+                if(localStorage.getItem("user")===null || !getLoggedInUserDetails().meals.includes(id))  {
                 
-                setUnSaved(true);
-                setSaveText("Save");
-                console.log("HEREEEEEE: ",{saveText})
-            }
-            else{
-                setUnSaved(false);
-                setSaveText("Unsave");
-                console.log("HEREEEEEE in Unsave: ",{saveText})
+                    setUnSaved(true);
+                    setSaveText("Save");
+                    console.log("HEREEEEEE: ",{saveText})
+                }
+                else{
+                    setUnSaved(false);
+                    setSaveText("Unsave");
+                    console.log("HEREEEEEE in Unsave: ",{saveText})
+                }
+    
             }
     }
     }
@@ -79,6 +85,9 @@ const Meal = () => {
 
 
     const saveToUser = (id,name) => {
+
+        let users = getLoggedInUserDetails();
+
         if(localStorage.getItem("user")!==null) {
             if(users.meals===undefined) {
                 users.meals = [];
